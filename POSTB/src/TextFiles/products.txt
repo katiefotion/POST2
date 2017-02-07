@@ -1,0 +1,2 @@
+1234     Tomato                   2.50
+13       Baked beans              1.78
