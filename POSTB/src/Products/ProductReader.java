@@ -52,5 +52,20 @@ public class ProductReader {
         ProductSpecification productSpec = new ProductSpecification(textDesc, price, upc);
         
         return productSpec;
+        
+        
+    }
+    public void printInfo()
+    {
+       //loop the arrayList of products to display info about the product
+       for(int i = 0; i < products.size(); i++)
+       {
+            ProductSpecification temp = new ProductSpecification(null, 0, null);
+            temp = products.get(i);
+            System.out.println("Product: " + temp.getProductDesc() 
+               + "Price: " + temp.getProductPrice() + " UPC: " + temp.getProductUPC());
+               
+       }  
+       System.out.println("\nEnd of Product Catalog.");
     }
  }
