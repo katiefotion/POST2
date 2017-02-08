@@ -5,7 +5,7 @@
  */
 package POST;
 
-import Customer.OrderReader;
+import Customer.Customer;
 import Products.ProductReader;
 import Products.ProductSpecification;
 import java.io.BufferedReader;
@@ -23,9 +23,9 @@ import java.util.logging.Logger;
 public class POST {
 
   // Define filepaths to product, customer list and transaction files 
-  private String productPath;
-  private String cListPath;
-  private String transactionPath;
+  private final String productPath;
+  private final String cListPath;
+  private final String transactionPath;
 
   private List<ProductSpecification> productCatalog;
 
@@ -42,21 +42,49 @@ public class POST {
 
     //printCatalog();
   }
+  
+  //TODO: called to store the transaction
+  public void processTransaction(Customer customer, List<ProductSpecification> orderItems) {
+    
+  }
+  
+  //TODO: called by cashier to print the invoice
+  public String getTransactionInvoice() {
+    return "";
+  }
 
-  public void printCatalog() {
+  /* Helper classes to get info from database */
+  public String getProductDescription(String upc) {
+
     for (ProductSpecification product : productCatalog) {
-      System.out.println(product.toString());
+      if (product.getProductUPC().equals(upc)) {
+        return product.getProductDesc();
+      }
     }
+
+    return "N/A";
+  }
+
+  public boolean isValidUPC(String upc) {
+    for (ProductSpecification product : productCatalog) {
+      if (product.getProductUPC().equals(upc)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   private void initializeCatalog() {
     ProductReader productReader;
-    
+
     try {
       productReader = new ProductReader(readFile(productPath));
       productCatalog = productReader.getProducts();
+
     } catch (IOException ex) {
-      Logger.getLogger(POST.class.getName()).log(Level.SEVERE, null, ex);
+      Logger.getLogger(POST.class
+              .getName()).log(Level.SEVERE, null, ex);
     }
   }
 
@@ -74,6 +102,13 @@ public class POST {
       return sb.toString();
     } finally {
       br.close();
+    }
+  }
+
+  /* Debug methods */
+  public void printCatalog() {
+    for (ProductSpecification product : productCatalog) {
+      System.out.println(product.toString());
     }
   }
 }
