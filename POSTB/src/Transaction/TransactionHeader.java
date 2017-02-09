@@ -21,12 +21,4 @@ public class TransactionHeader {
     public String getTransactionTime() {
         return this.transactionTime;
     }
-    
-    // Setter methods
-    public void getCustomerName(String name) {
-        this.customerName = name;
-    }
-    public void getTransactionTime(String time) {
-        this.transactionTime = time;
-    }
 }

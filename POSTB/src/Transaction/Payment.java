@@ -27,9 +27,6 @@ public class Payment {
     public String getTypePayment() {
         return this.typePayment;
     }
-    public double getPaymentTotal() {
-        return this.paymentTotal;
-    }
     public String getCardNumber() {
         return this.cardNumber; 
     }

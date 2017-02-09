@@ -67,15 +67,6 @@ public class Transaction {
     }
     
     // Setter methods
-    public void setTransactionHeader(TransactionHeader transHeader) {
-        this.header = transHeader;
-    }
-    public void setTransactionItems(TransactionItem[] items) {
-        this.transItems = items;
-    }
-    public void setNumTransItems(int numTransactions) {
-        this.numTransItems = numTransactions;
-    }
     public void setPayment(Payment p) {
         this.payment = p;
     }

@@ -31,14 +31,12 @@ public class POST {
 
   // Define filepaths to product, customer list and transaction files 
   private final String productPath;
-  private final String cListPath;
   private final String transactionPath;
 
   private List<ProductSpecification> productCatalog;
 
   public POST() {
     productPath ="TextFiles/products.txt";
-    cListPath = "TextFiles/customerorder.txt";
     transactionPath = "TextFiles/transaction.txt";
     
     // Changed from C:\\Users\\Flex\\Documents\\NetBeansProjects\\POSTB\\POSTB\\src\\...
@@ -199,13 +197,6 @@ public class POST {
       return sb.toString();
     } finally {
       br.close();
-    }
-  }
-
-  /* Debug methods */
-  public void printCatalog() {
-    for (ProductSpecification product : productCatalog) {
-      System.out.println(product.toString());
     }
   }
 }
