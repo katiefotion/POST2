@@ -129,7 +129,7 @@ public class POST {
     String customerName = transaction.getTransactionHeader().getCustomerName();
     String transactionDate = transaction.getTransactionHeader().getTransactionTime();
     String itemName, upc;
-    double price = 0, total = 0;
+    double price = 0, total = 0, change = 0;
     Payment payment = transaction.getPayment();
 
     //header
@@ -168,24 +168,28 @@ public class POST {
     invoice.append("Amount Tendered: ");
 
     String paymentType = payment.getTypePayment();
-    if (paymentType.equals("Cash")) {
+    if (paymentType.equals("CASH")) {
       double pay = payment.getPaymentTotal();
-      double change = 0;
+      change = 0;
 
       //note: no check for not enough pay (should be in process order)
       invoice.append(payment.getPaymentTotal())
               .append("\n");
 
-      if (pay > total) {
+      if (pay >= total) {
         change = total - pay;
-        invoice.append("Amount Returned: ")
-                .append("\n");
       }
-    } else if (paymentType.equals("Check")) {
+      
+    } else if (paymentType.equals("CHECK")) {
       invoice.append("Paid by check");
-    } else if (paymentType.equals("Credit Card")) {
-      invoice.append("Credit Card");
+    } else if (paymentType.equals("CARD")) {
+      invoice.append("Credit Card")
+              .append("\n");
     }
+    
+    invoice.append("Amount Returned: ")
+                .append(change)
+                .append("\n");
 
     return invoice.toString();
   }
@@ -232,6 +236,12 @@ public class POST {
     try {
       productReader = new ProductReader(readFile(productPath));
       productCatalog = productReader.getProducts();
+      
+      
+      for(ProductSpecification p : productCatalog) {
+        System.out.println(p.getProductUPC());
+      }
+              
 
     } catch (IOException ex) {
       Logger.getLogger(POST.class
