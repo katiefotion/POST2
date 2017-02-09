@@ -16,14 +16,11 @@ public class Transaction {
         this.header = new TransactionHeader(customerName, transactionTime);
         this.transItems = new TransactionItem[100];
         
-        int i = 0;
-        for (String line : transactionLines) {
-            while(i < numItems) {
-                String[] splitUPCQuantity = line.split(" ");
-                TransactionItem item = new TransactionItem(splitUPCQuantity[0], Integer.parseInt(splitUPCQuantity[1]));
-                this.transItems[i] = item;
-                i++;
-            }
+        for (int i = 0; i < numItems; i++) {
+            System.out.println("This line is in transaction: " + transactionLines[i]);
+            String[] splitUPCQuantity = transactionLines[i].split(" ");
+            TransactionItem item = new TransactionItem(splitUPCQuantity[0], Integer.parseInt(splitUPCQuantity[1]));
+            this.transItems[i] = item;
         }
         
         this.numTransItems = transactionLines.length; 
