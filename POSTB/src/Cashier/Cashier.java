@@ -38,15 +38,15 @@ public class Cashier {
 
     for (int i = 0; i < numOrders; i++) {
       String item = order[i];
+      System.out.println("This is in process ORder: " + item);
       upcAndQuantity = item.split(" ");
 
       if (post.isValidUPC(upcAndQuantity[0])) {
         productDesc = post.getProductDescription(upcAndQuantity[0]);
         
-        orderItems.add(new ProductSpecification(productDesc, Double.parseDouble(upcAndQuantity[0]), upcAndQuantity[1]));
+        orderItems.add(new ProductSpecification(productDesc, Double.parseDouble(upcAndQuantity[1]), upcAndQuantity[0]));
       }
     }
-    
     String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
     Transaction transaction = new Transaction(customer.getName(), timeStamp, customer.getOrder(), customer.getNumItems(), customer.getPaymentType(), 0.0);
     

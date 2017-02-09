@@ -1,9 +1,148 @@
-Jane
-1234     2
-13
-CASH $6.78
+Charlie2017.02.08.22.20.12
+1234      
+1234      
+1234      
+Item
+PaymentCash15.00
 
-Joe
-1234
-CREDIT 12345
+Charlie2017.02.08.22.21.15
+1234      
+1234      
+1234      
+Item
+PaymentCredit15.00
+
+Charlie      2017.02.08.22.22.51
+Item
+1234      
+1234      
+1234      
+Item
+Payment: Credit 15.00
+
+Charlie      2017.02.08.22.24.44
+Item
+1234      
+1234      
+1234      
+Item
+Payment: Cash 15.00
+
+Charlie      2017.02.08.22.26.31
+Item
+3      Ӓ
+3      Ӓ
+3      Ӓ
+Item
+Payment: Cash 0.00
+
+Charlie      2017.02.08.22.27.25
+Item
+1234      
+1234      
+1234      
+Item
+Payment: Cash 15.00
+
+Charlie      2017.02.08.22.28.36
+Item
+1234      
+1234      
+1234      
+Item
+Payment: Cash 15.00
+
+Charlie      2017.02.08.22.29.37
+Item
+1234      
+1234      
+1234      
+Item
+Payment: Cash 15.00
+
+Charlie      2017.02.08.22.31.00
+Item
+13      
+Item
+Payment: Cash 0.00
+
+Charlie      2017.02.08.22.33.22
+Item
+1234      1
+1234      1
+1234      1
+Item
+Payment: Cash $7.50
+
+Charlie      2017.02.08.22.39.02
+Item
+1234      3
+1234      3
+1234      3
+Item
+Payment: Cash $22.50
+
+Charlie      2017.02.08.22.39.39
+Item
+1234      3
+1234      3
+1234      3
+Item
+Payment: Cash $22.50
+
+Charlie      2017.02.08.22.43.32
+Item
+1234      3
+1234      3
+1234      3
+Item
+Payment: Cash $22.50
+
+Charlie      2017.02.08.22.44.48
+Item
+1234      2
+1234      2
+1234      2
+Item
+Payment: Cash $15.00
+
+Charlie      2017.02.08.22.45.57
+Item
+1234      3
+1234      3
+1234      3
+Item
+Payment: Cash $22.50
+
+Charlie      2017.02.08.22.46.38
+Item
+1234      3
+1234      3
+1234      3
+Item
+Payment: Cash $22.50
+
+Charlie      2017.02.08.22.47.22
+Item
+1234      1
+1234      1
+1234      1
+Item
+Payment: Cash $7.50
+
+Charlie      2017.02.08.22.48.35
+Item
+1234      2
+1234      2
+1234      2
+Item
+Payment: Cash $15.00
+
+Charlie      2017.02.08.22.49.29
+Item
+1234      2
+1234      2
+1234      2
+Item
+Payment: Cash $15.00
 
