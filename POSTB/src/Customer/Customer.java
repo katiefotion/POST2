@@ -43,11 +43,9 @@ public class Customer {
 
     Scanner keyboard = new Scanner(System.in);
     String item = keyboard.nextLine();
-    System.out.println("the: " + this.numItems + "\n");
 
     //end order when empty line is entered
     while (!item.isEmpty()) {
-      System.out.println("added: " + item + "\n");
       items[this.numItems] = item;
       item = keyboard.nextLine();
       this.numItems++;

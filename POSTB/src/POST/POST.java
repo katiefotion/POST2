@@ -64,7 +64,6 @@ public class POST {
 
     for (int i = 0; i < transaction.getNumTransItems(); i++) {
       if (temp[i] == null) {
-        System.out.println("BROKE");
         break;//break where element in TransactionItem list is null(empty)
       }
       quantity = temp[i].getProdQuantity();
@@ -143,6 +142,10 @@ public class POST {
 
     //items
     for (TransactionItem item : transaction.getTransactionItems()) {
+      if(item == null) {
+        break;
+      }
+      
       upc = item.getProductUPC();
       itemName = getProductDescription(upc);
       price = getProductPrice(upc);
