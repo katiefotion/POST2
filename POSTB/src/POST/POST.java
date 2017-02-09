@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.Time;
-import java.text.DecimalFormat;
 
 /**
  *
@@ -71,7 +70,6 @@ public class POST {
                 break;//break where element in TransactionItem list is null(empty)
             }
             quantity = temp[i].getProdQuantity();
-            System.out.println("quantity: " + quantity);
             tempUPC = temp[i].getProductUPC();
             price = getProductPrice(tempUPC);
             tempTotal = price * quantity;
@@ -83,42 +81,47 @@ public class POST {
         String finTotal = String.format("%.2f", finalTotal);
         System.out.println("The Final total is: $" + finTotal);
         
+        //update payment in transaction
+        Payment pTemp = transaction.getPayment();
+        pTemp.setPaymentTotal(finalTotal);
+        transaction.setPayment(pTemp);
+        
         
         //writing customer info to transaction  
-       FileWriter cFile;
-       BufferedWriter writeTotranscFile;
-       String cReturn = String.format("%n");
+        BufferedWriter writeTotranscFile;
+        String cReturn = String.format("%n");
         try {
             writeTotranscFile = new BufferedWriter(new FileWriter(transactionPath, true));
             
             //write header
             TransactionHeader hTemp = transaction.getTransactionHeader();
-            writeTotranscFile.write(hTemp.getCustomerName());
-            writeTotranscFile.write("      ");
-            writeTotranscFile.write(hTemp.getTransactionTime());
+            String f1 = String.format("%-10s%s",hTemp.getCustomerName(),hTemp.getTransactionTime());
+            writeTotranscFile.write(f1);
             writeTotranscFile.write(System.getProperty( "line.separator" ));
             
+            //write items
             writeTotranscFile.write("Item");
             writeTotranscFile.write(System.getProperty( "line.separator" ));
-           //write items
            for(int i = 0; i < transaction.getNumTransItems(); i++)
            {
             if(temp[i] == null)
                 {
                     break;//break where element in TransactionItem list is null(empty)
                 }
-            writeTotranscFile.write(temp[i].getProductUPC() + "      " + temp[i].getProdQuantity());
+            String f2 = String.format("%-10s%s",temp[i].getProductUPC(), temp[i].getProdQuantity());
+            writeTotranscFile.write(f2);
             writeTotranscFile.write(System.getProperty( "line.separator" ));
            }
-           //separator
+           
+           //end item separator
            writeTotranscFile.write("Item");
            writeTotranscFile.write(System.getProperty( "line.separator" ));
            
            //write payment
-           Payment pTemp = transaction.getPayment();
            writeTotranscFile.write("Payment: " + pTemp.getTypePayment() + " $" + finTotal);
+           
 
-           //end separator
+           //end transaction separator
            writeTotranscFile.write(System.getProperty( "line.separator" ));
            writeTotranscFile.write(System.getProperty( "line.separator" ));
            
@@ -131,7 +134,7 @@ public class POST {
              .getName()).log(Level.SEVERE, null, ex);
     }
         
-        //writing customer info to transaction
+        
             
     
   }
