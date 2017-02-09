@@ -39,28 +39,28 @@ public class Cashier {
     for (int i = 0; i < numOrders; i++) {
       String item = order[i];
       String[] splitLine = item.split(" ");
-      
-      if(splitLine.length == 1) {
-          upcAndQuantity[0] = splitLine[0];
-          upcAndQuantity[1] = "1";
+
+      if (splitLine.length == 1) {
+        upcAndQuantity[0] = splitLine[0];
+        upcAndQuantity[1] = "1";
+      } else {
+        upcAndQuantity = splitLine;
       }
-      else {
-          upcAndQuantity = splitLine;
-      }
-      
+
       if (post.isValidUPC(upcAndQuantity[0])) {
         productDesc = post.getProductDescription(upcAndQuantity[0]);
-        
+
         orderItems.add(new ProductSpecification(productDesc, Double.parseDouble(upcAndQuantity[1]), upcAndQuantity[0]));
       }
     }
     String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
     Transaction transaction = new Transaction(customer, timeStamp, 0.0);
-    
+
     post.processTransaction(customer, transaction);
+    printInvoice(transaction);
   }
 
-  public void printInvoice() {
-    //call post.getTransactionInvoice()
+  private void printInvoice(Transaction transaction) {
+    System.out.println(post.getTransactionInvoice(transaction));
   }
 }
