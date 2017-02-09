@@ -11,6 +11,9 @@ import Products.ProductSpecification;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import Transaction.Transaction;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -28,12 +31,13 @@ public class Cashier {
 
   //This is the "GUI" where the cashier is inputting/ringing up
   //the items into the POST system
-  public void processOrder(Customer customer, List<String> order) {
+  public void processOrder(Customer customer, String[] order, int numOrders) {
     List<ProductSpecification> orderItems = new ArrayList<>();
     String productDesc;
     String upcAndQuantity[]; //order is formatted as [upc][ ][quantity]
 
-    for (String item : order) {
+    for (int i = 0; i < numOrders; i++) {
+      String item = order[i];
       upcAndQuantity = item.split(" ");
 
       if (post.isValidUPC(upcAndQuantity[0])) {
@@ -43,7 +47,10 @@ public class Cashier {
       }
     }
     
-    post.processTransaction(customer, orderItems);
+    String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+    Transaction transaction = new Transaction(customer.getName(), timeStamp, customer.getOrder(), customer.getNumItems(), customer.getPaymentType(), 0.0);
+    
+    post.processTransaction(customer, transaction);
   }
 
   public void printInvoice() {

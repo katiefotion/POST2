@@ -21,6 +21,7 @@ public class ProductReader {
       ProductSpecification productSpec = this.getNextProduct();
       products.add(productSpec);
     }
+    
   }
 
   public ArrayList<ProductSpecification> getProducts() {

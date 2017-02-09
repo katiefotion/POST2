@@ -8,6 +8,7 @@ package POST;
 import Customer.Customer;
 import Products.ProductReader;
 import Products.ProductSpecification;
+import Transaction.Transaction;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.Time;
 
 /**
  *
@@ -30,9 +32,11 @@ public class POST {
   private List<ProductSpecification> productCatalog;
 
   public POST() {
-    productPath = "C:\\Users\\Flex\\Documents\\NetBeansProjects\\POSTB\\POSTB\\src\\TextFiles\\products.txt";
-    cListPath = "C:\\Users\\Flex\\Documents\\NetBeansProjects\\POSTB\\POSTB\\src\\TextFiles\\customerorder.txt";
-    transactionPath = "C:\\Users\\Flex\\Documents\\NetBeansProjects\\POSTB\\POSTB\\src\\TextFiles\\transaction.txt";
+    productPath = "TextFiles/products.txt";
+    cListPath = "TextFiles/customerorder.txt";
+    transactionPath = "TextFiles/transaction.txt";
+    
+    // Changed from C:\\Users\\Flex\\Documents\\NetBeansProjects\\POSTB\\POSTB\\src\\...
 
     productCatalog = new ArrayList<>();
   }
@@ -43,8 +47,10 @@ public class POST {
     //printCatalog();
   }
   
-  //TODO: called to store the transaction
-  public void processTransaction(Customer customer, List<ProductSpecification> orderItems) {
+  //TODO: called to calculate total and store the transaction
+  public void processTransaction(Customer customer, Transaction transaction) {
+    
+      
     
   }
   
