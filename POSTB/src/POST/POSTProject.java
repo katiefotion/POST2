@@ -26,7 +26,7 @@ public class POSTProject {
     customer.placeOrder();
     
     // The customer's invoice is printed
-    customer.printOrder();
+    
     
     
     Cashier cashier = new Cashier(store.getPost());
