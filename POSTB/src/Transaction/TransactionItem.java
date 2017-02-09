@@ -24,12 +24,4 @@ public class TransactionItem {
     public String getProductUPC() {
         return this.productUPC;
     }
-    
-    // Setters for UPC and quantity 
-    public void setProdQuantity(int quantity) {
-        this.prodQuantity = quantity;
-    }
-    public void setProductUPC(String upc) {
-        this.productUPC = upc;
-    }
 }

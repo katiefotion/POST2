@@ -25,12 +25,15 @@ public class Customer {
                                 //Format: [upc] [quantity]\n ...
   private int numItems;
   private String paymentType;
+  private String cardNumber; 
   
   public Customer(String name) {
     this.name = name;
     this.items = new String[100];
     this.numItems = 0;
     this.paymentType = "CASH";
+    this.cardNumber = "";
+    
   }
   
   public void placeOrder() {
@@ -52,6 +55,12 @@ public class Customer {
     System.out.println("Please enter the type of payment you would like to use (CASH, CHECK or CARD)");
     paymentType = keyboard.nextLine();
     
+    // If card, prompt for card number
+    if (paymentType.equals("CARD") || paymentType.equals("Card") || paymentType.equals("card")) {
+        System.out.println("Please enter your card number");
+        cardNumber = keyboard.nextLine();
+    }
+    
   }
 
   // Getter methods
@@ -67,13 +76,7 @@ public class Customer {
   public String getPaymentType() {
     return paymentType;
   }
-
-  
-  public void printOrder() {
-    
-    for (int i = 0; i < numItems; i++) {
-      String item = items[i];
-      System.out.println("Item: " + item);
-    }
+  public String getCardNumber() {
+    return cardNumber; 
   }
 }

@@ -20,15 +20,10 @@ public class POSTProject {
     // A customer walks into the store
     Customer customer = new Customer("Charlie");
     
-    // The customer interacts with cashier to place order (via cmd line, write to transaction.txt)
-    
-    // The customer's order is processed (i.e. read from transaction.txt most recent transaction)  
+    // Customer places order with cashier 
     customer.placeOrder();
     
-    // The customer's invoice is printed
-    customer.printOrder();
-    
-    
+    // Cashier processes customer's order 
     Cashier cashier = new Cashier(store.getPost());
     cashier.processOrder(customer, customer.getOrder(), customer.getNumItems());
   }

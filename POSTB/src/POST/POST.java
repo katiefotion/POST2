@@ -31,15 +31,13 @@ public class POST {
 
   // Define filepaths to product, customer list and transaction files 
   private final String productPath;
-  private final String cListPath;
   private final String transactionPath;
 
   private List<ProductSpecification> productCatalog;
 
   public POST() {
-    productPath ="/Users/darrylraveche/Downloads/POSTB-master 2/POSTB/src/TextFiles/products.txt";
-    cListPath = "/Users/darrylraveche/Downloads/POSTB-master 2/POSTB/src/TextFiles/customerorder.txt";
-    transactionPath = "/Users/darrylraveche/NetBeansProjects/CSC668Project/POSTBFINAL/POSTB/src/TextFiles/transaction.txt";
+    productPath ="TextFiles/products.txt";
+    transactionPath = "TextFiles/transaction.txt";
     
     // Changed from C:\\Users\\Flex\\Documents\\NetBeansProjects\\POSTB\\POSTB\\src\\...
 
@@ -76,10 +74,8 @@ public class POST {
             
             finalTotal = finalTotal + tempTotal;  
             
-            //System.out.println("Temp Total: $" + tempTotal + "Final Total: $" + finalTotal);
         }
         String finTotal = String.format("%.2f", finalTotal);
-        System.out.println("The Final total is: $" + finTotal);
         
         //update payment in transaction
         Payment pTemp = transaction.getPayment();
@@ -100,8 +96,6 @@ public class POST {
             writeTotranscFile.write(System.getProperty( "line.separator" ));
             
             //write items
-            writeTotranscFile.write("Item");
-            writeTotranscFile.write(System.getProperty( "line.separator" ));
            for(int i = 0; i < transaction.getNumTransItems(); i++)
            {
             if(temp[i] == null)
@@ -113,12 +107,14 @@ public class POST {
             writeTotranscFile.write(System.getProperty( "line.separator" ));
            }
            
-           //end item separator
-           writeTotranscFile.write("Item");
-           writeTotranscFile.write(System.getProperty( "line.separator" ));
-           
            //write payment
-           writeTotranscFile.write("Payment: " + pTemp.getTypePayment() + " $" + finTotal);
+           if (pTemp.getTypePayment().equals("CARD")||pTemp.getTypePayment().equals("Card")||pTemp.getTypePayment().equals("card")) {
+               writeTotranscFile.write(pTemp.getTypePayment() + " " + pTemp.getCardNumber());
+           }
+           else {
+               writeTotranscFile.write(pTemp.getTypePayment() + " $" + finTotal);
+           }
+           
            
 
            //end transaction separator
@@ -126,7 +122,6 @@ public class POST {
            writeTotranscFile.write(System.getProperty( "line.separator" ));
            
            writeTotranscFile.close();
-           System.out.println("Successfuly written to transaction file.");
         }
             
          catch (IOException ex) {
@@ -202,13 +197,6 @@ public class POST {
       return sb.toString();
     } finally {
       br.close();
-    }
-  }
-
-  /* Debug methods */
-  public void printCatalog() {
-    for (ProductSpecification product : productCatalog) {
-      System.out.println(product.toString());
     }
   }
 }
