@@ -38,8 +38,8 @@ public class POST {
   private Store store;
 
   public POST(Store store) {
-    productPath = "C:\\Users\\Flex\\Documents\\NetBeansProjects\\POSTB\\POSTB\\src\\TextFiles\\products.txt";
-    transactionPath = "C:\\Users\\Flex\\Documents\\NetBeansProjects\\POSTB\\POSTB\\src\\TextFiles\\transaction.txt";
+    productPath = "TextFiles/products.txt";
+    transactionPath = "TextFiles/transaction.txt";
 
     // Changed from C:\\Users\\Flex\\Documents\\NetBeansProjects\\POSTB\\POSTB\\src\\...
     productCatalog = new ArrayList<>();
@@ -133,7 +133,8 @@ public class POST {
     Payment payment = transaction.getPayment();
 
     //header
-    invoice.append(store.getStoreName())
+    invoice.append("\n")
+            .append(store.getStoreName())
             .append("\n")
             .append(customerName)
             .append(" ")
@@ -155,7 +156,7 @@ public class POST {
               .append(" @ ")
               .append(price)
               .append(" ")
-              .append(total)
+              .append(String.format("%.2f", total))
               .append("\n");
     }
 
@@ -165,10 +166,12 @@ public class POST {
             .append("\n");
 
     //payment
-    invoice.append("Amount Tendered: ");
 
     String paymentType = payment.getTypePayment();
     if (paymentType.equals("CASH")) {
+        
+      invoice.append("Amount Tendered: ");  
+        
       double pay = payment.getPaymentTotal();
       change = 0;
 
@@ -178,19 +181,20 @@ public class POST {
 
       if (pay >= total) {
         change = total - pay;
+        
+        invoice.append("Amount Returned: ")
+                .append(change)
+                .append("\n");
       }
       
     } else if (paymentType.equals("CHECK")) {
-      invoice.append("Paid by check");
+      invoice.append("Paid by Check\n");
     } else if (paymentType.equals("CARD")) {
-      invoice.append("Credit Card")
+      invoice.append("Credit Card: ")
+              .append(transaction.getPayment().getCardNumber())
               .append("\n");
     }
     
-    invoice.append("Amount Returned: ")
-                .append(change)
-                .append("\n");
-
     return invoice.toString();
   }
 
@@ -237,11 +241,6 @@ public class POST {
       productReader = new ProductReader(readFile(productPath));
       productCatalog = productReader.getProducts();
       
-      
-      for(ProductSpecification p : productCatalog) {
-        System.out.println(p.getProductUPC());
-      }
-              
 
     } catch (IOException ex) {
       Logger.getLogger(POST.class

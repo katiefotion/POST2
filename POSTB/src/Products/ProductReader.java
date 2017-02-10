@@ -52,7 +52,8 @@ public class ProductReader {
     for (int i = 0; i < 4; i++) {
       upc += line.charAt(i);
     }
-
+    upc = upc.replace(" ", "");
+    
     // Access text desription
     String textDesc = "";
     for (int i = 9; i < 29; i++) {
@@ -64,6 +65,7 @@ public class ProductReader {
     for (int i = 34; i < line.length(); i++) {
       priceStr += line.charAt(i);
     }
+    
 
     // Convert price to double
     double price = Double.parseDouble(priceStr);
