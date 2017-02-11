@@ -18,8 +18,8 @@ cd application/config
 5. copy two config files.  The new files are not tracked in the repo.  The have
 user specific information in them that can't change as we push and pull versions
 
-cp CopyMe-config.php config.php
-cp CopyMe-database.php database.php
+..cp CopyMe-config.php config.php
+..cp CopyMe-database.php database.php
 
 
 6. edit config.php with your favorite shell text browser. i.e. nano, pico, vi
