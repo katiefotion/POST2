@@ -2,10 +2,10 @@
 Install Instructions
 ####################
 
-1.  Log into your account
-2.  Move into your public_html directory
+1. Log into your account
+2. Move into your public_html directory
 
-cd public_html
+   cd public_html
 
 3. clone the git repo. (Do not miss the period at the end of the statement)
 
