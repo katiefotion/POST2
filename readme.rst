@@ -59,7 +59,7 @@ You don't need a web server as php has a built-in test server.
 
 4.  if you wish to use intellij instead of netbeans, install git for windows: https://git-for-windows.github.io/
 
-5.  Install netbeans or intellij
+5.  Install netbeans or intellij - ensure PHP language plug-in/support is installed
 
 6.  clone the repo:  https://netbeans.org/kb/docs/ide/git.html#clone or https://www.jetbrains.com/help/idea/2016.3/cloning-a-repository-from-github.html
 
@@ -74,5 +74,6 @@ You don't need a web server as php has a built-in test server.
 11. For intellij :  https://www.jetbrains.com/help/idea/2016.3/php-built-in-web-server.html
 
 Take the time to figure out how to push, pull, commit, etc with your IDE
-Google is your friend...
+
+Remember: Google is your friend...
 
