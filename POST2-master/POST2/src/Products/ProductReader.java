@@ -7,6 +7,7 @@ import java.util.Scanner;
  *
  * @author Katie Fotion
  */
+/* This class will potentially not be needed when switching to GUI */
 public class ProductReader {
 
   private Scanner scanner;
@@ -21,13 +22,13 @@ public class ProductReader {
       ProductSpecification productSpec = this.getNextProduct();
       products.add(productSpec);
     }
-    
   }
 
   public ArrayList<ProductSpecification> getProducts() {
     return products;
   }
 
+  /* UNUSED DELETE
   public void printInfo() {
     //loop the arrayList of products to display info about the product
     for (int i = 0; i < products.size(); i++) {
@@ -39,6 +40,7 @@ public class ProductReader {
     }
     System.out.println("\nEnd of Product Catalog.");
   }
+  */
 
   private boolean hasMoreProducts() {
     return (this.scanner.hasNextLine());
@@ -66,7 +68,6 @@ public class ProductReader {
       priceStr += line.charAt(i);
     }
     
-
     // Convert price to double
     double price = Double.parseDouble(priceStr);
 
@@ -74,6 +75,5 @@ public class ProductReader {
     ProductSpecification productSpec = new ProductSpecification(textDesc, price, upc);
 
     return productSpec;
-
   }
 }

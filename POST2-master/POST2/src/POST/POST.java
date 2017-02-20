@@ -6,6 +6,7 @@
 package POST;
 
 import Customer.Customer;
+import Products.ProductCatalog;
 import Products.ProductReader;
 import Products.ProductSpecification;
 import Store.Store;
@@ -16,6 +17,7 @@ import Transaction.Payment;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,33 +28,27 @@ import java.sql.Time;
 
 /**
  *
- * @author Flex
+ * @author Felix Chan Lee
  */
 public class POST {
+  private final String transactionPath; //TODO: remove
 
-  // Define filepaths to product, customer list and transaction files 
-  private final String productPath;
-  private final String transactionPath;
-
-  private List<ProductSpecification> productCatalog;
+  private ProductCatalog productCatalog;
   private Store store;
 
   public POST(Store store) {
-    productPath = "TextFiles/products.txt";
     transactionPath = "TextFiles/transaction.txt";
 
-    // Changed from C:\\Users\\Flex\\Documents\\NetBeansProjects\\POSTB\\POSTB\\src\\...
-    productCatalog = new ArrayList<>();
-    this.store = store;
+    this.store = store;    
+    this.productCatalog = store.getProductCatalog();
   }
 
+  //TODO: remove
   public void start() {
-    initializeCatalog();
-
-    //printCatalog();
+    //initializeCatalog();
   }
 
-  //TODO: called to calculate total and store the transaction
+  //called to calculate total and store the transaction
   public void processTransaction(Customer customer, Transaction transaction) {
 
     //calculate total
@@ -81,6 +77,7 @@ public class POST {
     pTemp.setPaymentTotal(finalTotal);
     transaction.setPayment(pTemp);
 
+    //TODO: store will write to sales log/transaction log
     //writing customer info to transaction  
     BufferedWriter writeTotranscFile;
     String cReturn = String.format("%n");
@@ -122,7 +119,7 @@ public class POST {
 
   }
 
-  //TODO: called by cashier to print the invoice
+  //called by store to get the calculated invoice
   public String getTransactionInvoice(Transaction transaction) {
     StringBuilder invoice = new StringBuilder();
 
@@ -143,10 +140,10 @@ public class POST {
 
     //items
     for (TransactionItem item : transaction.getTransactionItems()) {
-      if(item == null) {
+      if (item == null) {
         break;
       }
-      
+
       upc = item.getProductUPC();
       itemName = getProductDescription(upc);
       price = getProductPrice(upc);
@@ -166,12 +163,11 @@ public class POST {
             .append("\n");
 
     //payment
-
     String paymentType = payment.getTypePayment();
     if (paymentType.equals("CASH")) {
-        
-      invoice.append("Amount Tendered: ");  
-        
+
+      invoice.append("Amount Tendered: ");
+
       double pay = payment.getPaymentTotal();
       change = 0;
 
@@ -181,12 +177,12 @@ public class POST {
 
       if (pay >= total) {
         change = total - pay;
-        
+
         invoice.append("Amount Returned: ")
                 .append(change)
                 .append("\n");
       }
-      
+
     } else if (paymentType.equals("CHECK")) {
       invoice.append("Paid by Check\n");
     } else if (paymentType.equals("CARD")) {
@@ -194,7 +190,7 @@ public class POST {
               .append(transaction.getPayment().getCardNumber())
               .append("\n");
     }
-    
+
     return invoice.toString();
   }
 
@@ -203,65 +199,17 @@ public class POST {
     return this.store.getStoreName();
   }
 
+  //return N/A if not product found
   public String getProductDescription(String upc) {
-
-    for (ProductSpecification product : productCatalog) {
-      if (product.getProductUPC().equals(upc)) {
-        return product.getProductDesc();
-      }
-    }
-
-    return "N/A";
+    return isValidUPC(upc) ? this.productCatalog.getProductByUPC(upc).getProductDesc() : "N/A";
   }
 
+  //return 0 if not product found
   public double getProductPrice(String upc) {
-
-    for (ProductSpecification product : productCatalog) {
-      if (product.getProductUPC().equals(upc)) {
-        return product.getProductPrice();
-      }
-    }
-    return 0;
+    return isValidUPC(upc) ? this.productCatalog.getProductByUPC(upc).getProductPrice() : 0;
   }
 
   public boolean isValidUPC(String upc) {
-    for (ProductSpecification product : productCatalog) {
-      if (product.getProductUPC().equals(upc)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-
-  private void initializeCatalog() {
-    ProductReader productReader;
-
-    try {
-      productReader = new ProductReader(readFile(productPath));
-      productCatalog = productReader.getProducts();
-      
-
-    } catch (IOException ex) {
-      Logger.getLogger(POST.class
-              .getName()).log(Level.SEVERE, null, ex);
-    }
-  }
-
-  private String readFile(String fileName) throws IOException {
-    BufferedReader br = new BufferedReader(new FileReader(fileName));
-    try {
-      StringBuilder sb = new StringBuilder();
-      String line = br.readLine();
-
-      while (line != null) {
-        sb.append(line);
-        sb.append("\n");
-        line = br.readLine();
-      }
-      return sb.toString();
-    } finally {
-      br.close();
-    }
+    return this.productCatalog.getProductByUPC(upc) != null;
   }
 }
