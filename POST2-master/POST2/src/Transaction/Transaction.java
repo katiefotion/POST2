@@ -45,10 +45,18 @@ public class Transaction {
         this.numTransItems = transactionLines.length; 
         if(customer.getPaymentType().equals("CARD") || customer.getPaymentType().equals("Card") || customer.getPaymentType().equals("card"))
         {
-            this.payment = new Payment(paymentType, customer.getCardNumber());
+            this.payment = new CardPayment(customer.getCardNumber(), paymentTotal);
         }
-        else {
-            this.payment = new Payment(paymentType, paymentTotal);
+        else if (customer.getPaymentType().equals("CHECK") || customer.getPaymentType().equals("Check") || customer.getPaymentType().equals("check")){
+            this.payment = new CheckPayment(paymentTotal);
+        }
+        else if(customer.getPaymentType().equals("CASH") || customer.getPaymentType().equals("Cash") || customer.getPaymentType().equals("cash"))
+        {
+            this.payment = new CashPayment(paymentTotal);
+        }
+        else
+        {
+            this.payment = new Payment(paymentTotal);
         }
     }
     

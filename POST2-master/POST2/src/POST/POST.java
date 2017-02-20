@@ -77,6 +77,10 @@ public class POST {
     pTemp.setPaymentTotal(finalTotal);
     transaction.setPayment(pTemp);
 
+    //debug method to print out class for paymentType
+    //TODO: set new strings for writing to transaction and printout
+    String pay = pTemp.getClass().getName();
+    System.out.println(pay);
     //TODO: store will write to sales log/transaction log
     //writing customer info to transaction  
     BufferedWriter writeTotranscFile;
@@ -89,7 +93,7 @@ public class POST {
       String f1 = String.format("%-10s%s", hTemp.getCustomerName(), hTemp.getTransactionTime());
       writeTotranscFile.write(f1);
       writeTotranscFile.write(System.getProperty("line.separator"));
-
+      
       //write items
       for (int i = 0; i < transaction.getNumTransItems(); i++) {
         if (temp[i] == null) {
@@ -100,13 +104,16 @@ public class POST {
         writeTotranscFile.write(System.getProperty("line.separator"));
       }
 
-      //write payment
+      //String pay = pTemp.getClass().getName();
+      
+      
+      /*/write payment
       if (pTemp.getTypePayment().equals("CARD") || pTemp.getTypePayment().equals("Card") || pTemp.getTypePayment().equals("card")) {
         writeTotranscFile.write(pTemp.getTypePayment() + " " + pTemp.getCardNumber());
       } else {
         writeTotranscFile.write(pTemp.getTypePayment() + " $" + finTotal);
       }
-
+*/
       //end transaction separator
       writeTotranscFile.write(System.getProperty("line.separator"));
       writeTotranscFile.write(System.getProperty("line.separator"));
@@ -163,7 +170,7 @@ public class POST {
             .append("\n");
 
     //payment
-    String paymentType = payment.getTypePayment();
+    String paymentType = payment.getClass().getName();
     if (paymentType.equals("CASH")) {
 
       invoice.append("Amount Tendered: ");
@@ -187,7 +194,7 @@ public class POST {
       invoice.append("Paid by Check\n");
     } else if (paymentType.equals("CARD")) {
       invoice.append("Credit Card: ")
-              .append(transaction.getPayment().getCardNumber())
+              //.append(transaction.getPayment().getCardNumber())
               .append("\n");
     }
 
