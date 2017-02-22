@@ -104,7 +104,7 @@ public class NetClientGet {
 
             String customerName = t.getTransactionHeader().getCustomerName();
             String datetime = t.getTransactionHeader().getTransactionTime();
-            String paymentType = t.getPayment().getTypePayment();
+            String paymentType = t.getPayment().getClass().getName();
             double total = t.getPayment().getPaymentTotal();
             int transactionId = ++lastTransactionId;
             
