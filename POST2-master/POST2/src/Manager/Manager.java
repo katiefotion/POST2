@@ -5,6 +5,7 @@
  */
 package Manager;
 
+import GUI.GUI;
 import POST.POST;
 import Store.Store;
 
@@ -22,6 +23,9 @@ public class Manager {
 
   public void openStore() {
     startPOST();
+    
+    String[] arguments = new String[] {""};
+    GUI.main(arguments);
   }
 
   private void startPOST() {

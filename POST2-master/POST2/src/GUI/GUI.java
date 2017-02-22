@@ -7,7 +7,10 @@ package GUI;
 
 import Products.ProductSpecification;
 import Store.Store;
+import Transaction.Payment;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -24,9 +27,12 @@ public class GUI extends javax.swing.JFrame {
      * Creates new form GUI
      */
     
-    Date date = new Date();
-    Store store;
-    double total = 0;
+    private Date date = new Date();
+    private Store store;
+    private double total = 0;
+    private ArrayList<ProductSpecification> cart = new ArrayList<>();
+    private String customerName;
+    private Payment payment;
     public GUI() {
         try {
             this.store = new Store("Greary Street", "SellFoods");
@@ -302,6 +308,7 @@ public class GUI extends javax.swing.JFrame {
     private void EnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterButtonActionPerformed
         // TODO add your handling code here:
         ProductSpecification selectedProduct = store.getProductCatalog().getProductByUPC(UPCBox.getSelectedItem().toString());
+        cart.add(selectedProduct);
         jTextArea1.append(selectedProduct.getProductDesc() + " " + QuantityBox.getSelectedItem().toString()+ " $" + selectedProduct.getProductPrice()+ " $" + (selectedProduct.getProductPrice()*Integer.parseInt(QuantityBox.getSelectedItem().toString())) + "\n");
         total += (selectedProduct.getProductPrice()*Integer.parseInt(QuantityBox.getSelectedItem().toString()));
         TotalValue.setText("$" + total);
