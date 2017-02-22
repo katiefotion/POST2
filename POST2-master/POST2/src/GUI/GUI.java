@@ -5,7 +5,14 @@
  */
 package GUI;
 
+import Products.ProductSpecification;
+import Store.Store;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -18,8 +25,16 @@ public class GUI extends javax.swing.JFrame {
      */
     
     Date date = new Date();
-    
+    Store store;
+    double total = 0;
     public GUI() {
+        try {
+            this.store = new Store("Greary Street", "SellFoods");
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         initComponents();
     }
 
@@ -36,6 +51,9 @@ public class GUI extends javax.swing.JFrame {
         CustomerName = new javax.swing.JLabel();
         ProductPanel = new javax.swing.JPanel();
         UPCBox = new javax.swing.JComboBox<>();
+        for(int i = 0; i < store.getProductCatalog().getProductList().size(); i++){
+            UPCBox.addItem(store.getProductCatalog().getProductList().get(i).getProductUPC());
+        }
         UPC = new javax.swing.JLabel();
         QuantityBox = new javax.swing.JComboBox<>();
         Quantity = new javax.swing.JLabel();
@@ -67,8 +85,6 @@ public class GUI extends javax.swing.JFrame {
 
         ProductPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Product"));
 
-        UPCBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         UPC.setText("UPC");
 
         QuantityBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99" }));
@@ -81,6 +97,11 @@ public class GUI extends javax.swing.JFrame {
         Quantity.setText("Quantity");
 
         EnterButton.setText("Enter");
+        EnterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnterButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ProductPanelLayout = new javax.swing.GroupLayout(ProductPanel);
         ProductPanel.setLayout(ProductPanelLayout);
@@ -188,6 +209,11 @@ public class GUI extends javax.swing.JFrame {
         Amount.setText("Amount");
 
         PayButton.setText("Pay");
+        PayButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PayButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PaymentPanelLayout = new javax.swing.GroupLayout(PaymentPanel);
         PaymentPanel.setLayout(PaymentPanelLayout);
@@ -237,7 +263,7 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(CustomerNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(55, 55, 55)
                                 .addComponent(ProductPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 36, Short.MAX_VALUE))
+                        .addGap(0, 48, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(DateLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -272,6 +298,25 @@ public class GUI extends javax.swing.JFrame {
     private void QuantityBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuantityBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_QuantityBoxActionPerformed
+
+    private void EnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterButtonActionPerformed
+        // TODO add your handling code here:
+        ProductSpecification selectedProduct = store.getProductCatalog().getProductByUPC(UPCBox.getSelectedItem().toString());
+        jTextArea1.append(selectedProduct.getProductDesc() + " " + QuantityBox.getSelectedItem().toString()+ " $" + selectedProduct.getProductPrice()+ " $" + (selectedProduct.getProductPrice()*Integer.parseInt(QuantityBox.getSelectedItem().toString())) + "\n");
+        total += (selectedProduct.getProductPrice()*Integer.parseInt(QuantityBox.getSelectedItem().toString()));
+        TotalValue.setText("$" + total);
+    }//GEN-LAST:event_EnterButtonActionPerformed
+
+    private void PayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayButtonActionPerformed
+        // TODO add your handling code here:
+        if(Double.parseDouble(AmountField.getText()) < total){
+            JOptionPane.showMessageDialog(null, "You're payment input was less than the total", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            jTextArea1.setText("");
+            TotalValue.setText("$0.00");
+        }
+    }//GEN-LAST:event_PayButtonActionPerformed
 
     /**
      * @param args the command line arguments

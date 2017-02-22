@@ -40,6 +40,9 @@ public class ProductCatalog {
     
     return null;
   }
+  public List<ProductSpecification> getProductList(){
+      return products;
+  }
 
   private void init() {
     String upc = "";
