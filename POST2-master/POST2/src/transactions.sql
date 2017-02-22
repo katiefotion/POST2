@@ -1,8 +1,9 @@
 CREATE TABLE transactions(
   transaction_id INTEGER NOT NULL,
-  timestamp TIMESTAMP NOT NULL,
+  datetime VARCHAR(30) NOT NULL,
   customer_name VARCHAR(50),
   payment_type VARCHAR(5),
+  total DECIMAL(5, 2),
   PRIMARY KEY (transaction_id)
 );
 

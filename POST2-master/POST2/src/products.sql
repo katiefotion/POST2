@@ -1,7 +1,7 @@
 CREATE TABLE products(
   upc INTEGER NOT NULL,
   description VARCHAR(25),
-  unit_price DECIMAL NOT NULL,
+  unit_price DECIMAL(5,2) NOT NULL,
   PRIMARY KEY (upc)
 );
   
