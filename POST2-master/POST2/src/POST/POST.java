@@ -10,13 +10,7 @@ import Products.ProductCatalog;
 import Store.Store;
 import Transaction.Transaction;
 import Transaction.TransactionItem;
-import Transaction.TransactionHeader;
 import Transaction.Payment;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.Date;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
@@ -26,19 +20,16 @@ import org.xml.sax.SAXException;
  * @author Felix Chan Lee
  */
 public class POST {
-  private final String transactionPath; //TODO: remove
-
+    
   private ProductCatalog productCatalog;
   private Store store;
 
   public POST(Store store) {
-    transactionPath = "TextFiles/transaction.txt";
-
     this.store = store;    
     this.productCatalog = store.getProductCatalog();
   }
 
-  //called to calculate total and store the transaction
+  //Called to store the transaction
   public void processTransaction(Transaction transaction) throws ParserConfigurationException, SAXException {
     // Write transaction to database 
     boolean success = false;
@@ -48,54 +39,10 @@ public class POST {
     }
     finally {
       if(!success) {
-          
-          System.out.println("failure");
-    
-//        TransactionItem[] temp = transaction.getTransactionItems();
-//        
-//        //writing customer info to transaction  
-//        BufferedWriter writeTotranscFile;
-//        String cReturn = String.format("%n");
-//        try {
-//          writeTotranscFile = new BufferedWriter(new FileWriter(transactionPath, true));
-//
-//          //write header
-//          TransactionHeader hTemp = transaction.getTransactionHeader();
-//          String f1 = String.format("%-10s%s", hTemp.getCustomerName(), hTemp.getTransactionDate());
-//          writeTotranscFile.write(f1);
-//          writeTotranscFile.write(System.getProperty("line.separator"));
-//
-//          //write items
-//          for (int i = 0; i < transaction.getNumTransItems(); i++) {
-//            if (temp[i] == null) {
-//              break;//break where element in TransactionItem list is null(empty)
-//            }
-//            String f2 = String.format("%-10s%s", temp[i].getProductUPC(), temp[i].getProdQuantity());
-//            writeTotranscFile.write(f2);
-//            writeTotranscFile.write(System.getProperty("line.separator"));
-//          }
-//
-//          //String pay = pTemp.getClass().getName();
-//      
-//      
-//          /*/write payment
-//          if (pTemp.getTypePayment().equals("CARD") || pTemp.getTypePayment().equals("Card") || pTemp.getTypePayment().equals("card")) {
-//            writeTotranscFile.write(pTemp.getTypePayment() + " " + pTemp.getCardNumber());
-//          } else {
-//            writeTotranscFile.write(pTemp.getTypePayment() + " $" + finTotal);
-//          }
-//          */
-//          //end transaction separator
-//          writeTotranscFile.write(System.getProperty("line.separator"));
-//          writeTotranscFile.write(System.getProperty("line.separator"));
-//
-//          writeTotranscFile.close();
-//        } catch (IOException ex) {
-//            Logger.getLogger(POST.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+          // This is where a handler would go to temporarily store transaction in file until server comes back
       }
       
-      //this.printInvoice(transaction);
+      this.printInvoice(transaction);
     }
 
   }
@@ -109,7 +56,7 @@ public class POST {
     double price = 0, total = 0, change = 0;
     Payment payment = transaction.getPayment();
 
-    //header
+    //Header
     invoice.append("\n")
             .append(store.getStoreName())
             .append("\n")
@@ -197,7 +144,7 @@ public class POST {
     return this.productCatalog.getProductByUPC(upc) != null;
   }
   
-  private void printInvoice(Transaction transaction) {
+  public void printInvoice(Transaction transaction) {
     System.out.println(this.getTransactionInvoice(transaction));
   }
 }

@@ -41,13 +41,6 @@ public class GUI extends javax.swing.JFrame {
     private Payment payment;
 
     public GUI(POST post) {
-        /*try {
-            this.store = new Store("Greary Street", "SellFoods");
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
         this.date = new Date();
         this.total = 0;
         this.post = post;
@@ -332,9 +325,6 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_QuantityBoxActionPerformed
 
     private void EnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterButtonActionPerformed
-        // TODO add your handling code here:
-        //Replace this business logic with a call to POST???
-        //ie. call POST to do a subtotal of the items
         
         ProductSpecification selectedProduct = post.getStore().getProductCatalog().getProductByUPC(UPCBox.getSelectedItem().toString());
         TransactionItem transItem = new TransactionItem(UPCBox.getSelectedItem().toString(), Integer.parseInt(QuantityBox.getSelectedItem().toString()));
@@ -346,9 +336,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_EnterButtonActionPerformed
 
     private void PayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayButtonActionPerformed
-        // TODO add your handling code here:
-        //1. store into database by using netclient
-        //2. call post to print the invoice (ie. print to file)
+        
         if (Double.parseDouble(AmountField.getText()) < total) {
             JOptionPane.showMessageDialog(null, "You're payment input was less than the total", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -362,8 +350,6 @@ public class GUI extends javax.swing.JFrame {
             payment = new CheckPayment(total);
         else if (PaymentTypeBox.getSelectedItem().toString().equals("Credit"))
             payment = new CardPayment("xxxxxxxxx", total); 
-        
-        customerName = CustomerNameBox.getText();
         
         TransactionHeader header = new TransactionHeader(customerName, date);
         Transaction t = new Transaction(header, cart, numTransItems, payment);
@@ -382,11 +368,11 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_PayButtonActionPerformed
 
     private void CustomerNameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerNameBoxActionPerformed
-        // TODO add your handling code here:
+        customerName = CustomerNameBox.getText();
     }//GEN-LAST:event_CustomerNameBoxActionPerformed
 
     private void UPCBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UPCBoxActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_UPCBoxActionPerformed
 
     public void start(POST post) {

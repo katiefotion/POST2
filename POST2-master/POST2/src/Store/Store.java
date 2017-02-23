@@ -5,7 +5,6 @@ import NetClientGet.NetClientGet;
 import POST.POST;
 import Products.ProductCatalog;
 import Products.ProductSpecification;
-import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
@@ -19,7 +18,6 @@ public class Store {
   private String storeAddress;
   private String storeName;
   private ProductCatalog catalog;
-  
   private POST post;
   private GUI postGUI;
 
