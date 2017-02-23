@@ -1,7 +1,6 @@
 package Store;
 
 import GUI.GUI;
-import Manager.Manager;
 import NetClientGet.NetClientGet;
 import POST.POST;
 import Products.ProductCatalog;
