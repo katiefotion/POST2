@@ -24,8 +24,8 @@ public class Manager {
   public void openStore() {
     startPOST();
     
-    String[] arguments = new String[] {""};
-    //GUI.main(arguments);
+    //String[] arguments = new String[] {""};
+    //GUI.main(); 
   }
 
   private void startPOST() {

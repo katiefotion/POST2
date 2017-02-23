@@ -12,6 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -23,7 +24,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class NetClientGet {
-
+    
     public static int lastTransactionId = 0;
 
     public static List<ProductSpecification> getProducts()
@@ -89,6 +90,7 @@ public class NetClientGet {
 
     public static void postTransaction(Transaction t)
             throws ParserConfigurationException, SAXException {
+        
         try {
             /*
              POST
@@ -102,20 +104,20 @@ public class NetClientGet {
             postConnSale.setRequestProperty("Content-Type", "application/xml");
 
             String customerName = t.getTransactionHeader().getCustomerName();
-            String datetime = t.getTransactionHeader().getTransactionTime();
-            String paymentType = t.getPayment().getClass().getName();
+            Date datetime = t.getTransactionHeader().getTransactionDate();
+            String paymentType = t.getPayment().getClass().getName().replace("Transaction.", "").replace("Payment", "");
             double total = t.getPayment().getPaymentTotal();
             int transactionId = ++lastTransactionId;
-
+            
             String newSaleString
-                    = "<transactions> \n"
-                    + "           <customerName>" + customerName + "</customerName> \n"
-                    + "           <datetime>" + datetime + "</datetime> \n"
-                    + "           <paymentType>" + paymentType + "</paymentType> \n"
-                    + "           <total>" + total + "</total> \n"
+                    = "     <transactions> \n"
+                    + "          <customerName>" + customerName + "</customerName> \n"
+                    + "          <datetime>" + datetime + "</datetime> \n"
+                    + "          <paymentType>" + paymentType + "</paymentType> \n"
+                    + "          <total>" + total + "</total> \n"
                     + "           <transactionId>" + transactionId + "</transactionId> \n"
                     + "     </transactions> ";
-
+            
             OutputStream postOutputStream = postConnSale.getOutputStream();
             postOutputStream.write(newSaleString.getBytes());
             postOutputStream.flush();
@@ -136,8 +138,11 @@ public class NetClientGet {
 
             TransactionItem[] transItems = t.getTransactionItems();
 
+            OutputStream postOutputStream2 = postConnSaleItem.getOutputStream();
+            
+            int offset = 0;
             for (int i = 0; i < t.getNumTransItems(); i++) {
-
+                
                 TransactionItem transItem = transItems[i];
 
                 String upc = transItem.getProductUPC();
@@ -174,17 +179,21 @@ public class NetClientGet {
                         + "          </transactions>  \n"
                         + "      </transactionitems>";
 
-                postOutputStream = postConnSaleItem.getOutputStream();
-                postOutputStream.write(newSaleItemString.getBytes());
-                postOutputStream.flush();
+                
+                int numBytes = newSaleItemString.getBytes().length; 
+                postOutputStream2.write(newSaleItemString.getBytes(), offset, numBytes);
 
                 if (postConnSaleItem.getResponseCode() >= 400) {
                     throw new RuntimeException("Failed : HTTP error code : "
                             + postConnSaleItem.getResponseCode());
                 }
-
+                
+                offset += numBytes;
             }
 
+            
+            postOutputStream2.flush();
+            
             postConnSaleItem.disconnect();
         } catch (MalformedURLException e) {
             e.printStackTrace();

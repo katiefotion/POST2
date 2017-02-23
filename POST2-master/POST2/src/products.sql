@@ -12,4 +12,4 @@ INSERT INTO products VALUES
 (13, 'Baked beans', 1.78);
 
 INSERT INTO products VALUES
-(203, 'Paper towels eight-pack', 7.99);
+(203, 'Paper towels', 7.99);

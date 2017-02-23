@@ -27,16 +27,15 @@ public class Store {
   public Store(String address, String name) throws ParserConfigurationException, SAXException {
     this.storeAddress = address;
     this.storeName = name;
-    
-    initializeCatalog(); //note, catalog needs to be initialized before passing store to post for now...
-    this.post = new POST(this);
-    postGUI = new GUI(post);
   }
   
-  public void openStore() {
-    //String[] arguments = new String[] {""};
-    //GUI.main(arguments);
-      postGUI.start();
+  public void openStore() throws ParserConfigurationException, SAXException {
+      
+    initializeCatalog(); //note, catalog needs to be initialized before passing store to post for now...
+    this.post = new POST(this);
+    
+    postGUI = new GUI(post);
+    postGUI.start(this.post);
   }
 
   public POST getPost() {

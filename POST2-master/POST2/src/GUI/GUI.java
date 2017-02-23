@@ -7,8 +7,13 @@ package GUI;
 
 import POST.POST;
 import Products.ProductSpecification;
-import Store.Store;
+import Transaction.CardPayment;
+import Transaction.CashPayment;
+import Transaction.CheckPayment;
 import Transaction.Payment;
+import Transaction.Transaction;
+import Transaction.TransactionHeader;
+import Transaction.TransactionItem;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +35,8 @@ public class GUI extends javax.swing.JFrame {
     private Date date;
     private POST post;
     private double total;
-    private List<ProductSpecification> cart;
+    private TransactionItem[] cart;
+    private int numTransItems; 
     private String customerName;
     private Payment payment;
 
@@ -45,7 +51,8 @@ public class GUI extends javax.swing.JFrame {
         this.date = new Date();
         this.total = 0;
         this.post = post;
-        this.cart = new ArrayList<>();
+        this.cart = new TransactionItem[100];
+        this.numTransItems = 0;
         this.customerName = "";        
         initComponents();
     }
@@ -62,14 +69,14 @@ public class GUI extends javax.swing.JFrame {
         CustomerNameBox = new javax.swing.JTextField();
         CustomerName = new javax.swing.JLabel();
         ProductPanel = new javax.swing.JPanel();
-        UPCBox = new javax.swing.JComboBox<String>();
+        UPCBox = new javax.swing.JComboBox<>();
 
         List<ProductSpecification> products = post.getStore().getProductCatalog().getProductList();
         for(ProductSpecification product : products) {
             UPCBox.addItem(product.getProductUPC());
         }
         UPC = new javax.swing.JLabel();
-        QuantityBox = new javax.swing.JComboBox<String>();
+        QuantityBox = new javax.swing.JComboBox<>();
         Quantity = new javax.swing.JLabel();
         EnterButton = new javax.swing.JButton();
         InvoicePanel = new javax.swing.JPanel();
@@ -84,7 +91,7 @@ public class GUI extends javax.swing.JFrame {
         DateLabel = new javax.swing.JLabel();
         DateLabel.setText(date.toString());
         PaymentPanel = new javax.swing.JPanel();
-        PaymentTypeBox = new javax.swing.JComboBox<String>();
+        PaymentTypeBox = new javax.swing.JComboBox<>();
         PaymentType = new javax.swing.JLabel();
         Amount = new javax.swing.JLabel();
         AmountField = new javax.swing.JTextField();
@@ -93,15 +100,25 @@ public class GUI extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("POST Terminal");
 
-        CustomerNameBox.setText("Bozo the Clown");
+        CustomerNameBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CustomerNameBoxActionPerformed(evt);
+            }
+        });
 
         CustomerName.setText("Customer Name");
 
         ProductPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Product"));
 
+        UPCBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UPCBoxActionPerformed(evt);
+            }
+        });
+
         UPC.setText("UPC");
 
-        QuantityBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99" }));
+        QuantityBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99" }));
         QuantityBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 QuantityBoxActionPerformed(evt);
@@ -216,7 +233,7 @@ public class GUI extends javax.swing.JFrame {
 
         PaymentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Payment"));
 
-        PaymentTypeBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cash", "Check", "Credit" }));
+        PaymentTypeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Check", "Credit" }));
 
         PaymentType.setText("Payment Type");
 
@@ -310,7 +327,8 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void QuantityBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuantityBoxActionPerformed
-        // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_QuantityBoxActionPerformed
 
     private void EnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterButtonActionPerformed
@@ -319,10 +337,12 @@ public class GUI extends javax.swing.JFrame {
         //ie. call POST to do a subtotal of the items
         
         ProductSpecification selectedProduct = post.getStore().getProductCatalog().getProductByUPC(UPCBox.getSelectedItem().toString());
-        cart.add(selectedProduct);
-        jTextArea1.append(selectedProduct.getProductDesc() + " " + QuantityBox.getSelectedItem().toString() + " $" + selectedProduct.getProductPrice() + " $" + (selectedProduct.getProductPrice() * Integer.parseInt(QuantityBox.getSelectedItem().toString())) + "\n");
+        TransactionItem transItem = new TransactionItem(UPCBox.getSelectedItem().toString(), Integer.parseInt(QuantityBox.getSelectedItem().toString()));
+        cart[numTransItems] = transItem;
+        numTransItems++;
+        jTextArea1.append(selectedProduct.getProductDesc() + "\t\t" + QuantityBox.getSelectedItem().toString() + "\t$" + String.format("%.2f", selectedProduct.getProductPrice()) + "      $" + String.format("%.2f", selectedProduct.getProductPrice() * Integer.parseInt(QuantityBox.getSelectedItem().toString())) + "\n");
         total += (selectedProduct.getProductPrice() * Integer.parseInt(QuantityBox.getSelectedItem().toString()));
-        TotalValue.setText("$" + total);
+        TotalValue.setText("$" + String.format("%.2f", total));
     }//GEN-LAST:event_EnterButtonActionPerformed
 
     private void PayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayButtonActionPerformed
@@ -335,9 +355,41 @@ public class GUI extends javax.swing.JFrame {
             jTextArea1.setText("");
             TotalValue.setText("$0.00");
         }
+        
+        if (PaymentTypeBox.getSelectedItem().toString().equals("Cash"))
+            payment = new CashPayment(total);
+        else if (PaymentTypeBox.getSelectedItem().toString().equals("Check"))
+            payment = new CheckPayment(total);
+        else if (PaymentTypeBox.getSelectedItem().toString().equals("Credit"))
+            payment = new CardPayment("xxxxxxxxx", total); 
+        
+        customerName = CustomerNameBox.getText();
+        
+        TransactionHeader header = new TransactionHeader(customerName, date);
+        Transaction t = new Transaction(header, cart, numTransItems, payment);
+        
+        try {
+            this.post.processTransaction(t);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        total = 0;
+        CustomerNameBox.setText("");
+        AmountField.setText("");
     }//GEN-LAST:event_PayButtonActionPerformed
 
-    public void start() {
+    private void CustomerNameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerNameBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CustomerNameBoxActionPerformed
+
+    private void UPCBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UPCBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UPCBoxActionPerformed
+
+    public void start(POST post) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -360,7 +412,7 @@ public class GUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                setVisible(true);
+                new GUI(post).setVisible(true);
             }
         });
     }

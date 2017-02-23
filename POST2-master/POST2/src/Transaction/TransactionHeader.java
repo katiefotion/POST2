@@ -1,5 +1,7 @@
 package Transaction;
 
+import java.util.Date;
+
 /**
  *
  * @author katie
@@ -7,18 +9,18 @@ package Transaction;
 public class TransactionHeader {
     
     private String customerName;
-    private String transactionTime; 
+    private Date transactionDate; 
     
-    public TransactionHeader(String name, String time) {
+    public TransactionHeader(String name, Date date) {
         this.customerName = name;
-        this.transactionTime = time;
+        this.transactionDate = date;
     }
     
     // Getter methods 
     public String getCustomerName() {
         return this.customerName;
     }
-    public String getTransactionTime() {
-        return this.transactionTime;
+    public Date getTransactionDate() {
+        return this.transactionDate;
     }
 }

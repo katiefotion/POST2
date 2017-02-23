@@ -5,26 +5,21 @@
  */
 package POST;
 
-import Customer.Customer;
+import NetClientGet.NetClientGet;
 import Products.ProductCatalog;
-import Products.ProductReader;
-import Products.ProductSpecification;
 import Store.Store;
 import Transaction.Transaction;
 import Transaction.TransactionItem;
 import Transaction.TransactionHeader;
 import Transaction.Payment;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.sql.Time;
+import java.util.Date;
+import javax.xml.parsers.ParserConfigurationException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -44,89 +39,72 @@ public class POST {
   }
 
   //called to calculate total and store the transaction
-  public void processTransaction(Customer customer, Transaction transaction) {
-
-    //calculate total
-    TransactionItem[] temp = transaction.getTransactionItems();
-    String tempUPC;
-    int quantity;
-    double finalTotal = 0;
-    double price, tempTotal;
-
-    for (int i = 0; i < transaction.getNumTransItems(); i++) {
-      if (temp[i] == null) {
-        break;//break where element in TransactionItem list is null(empty)
-      }
-      quantity = temp[i].getProdQuantity();
-      tempUPC = temp[i].getProductUPC();
-      price = getProductPrice(tempUPC);
-      tempTotal = price * quantity;
-
-      finalTotal = finalTotal + tempTotal;
-
-    }
-    String finTotal = String.format("%.2f", finalTotal);
-
-    //update payment in transaction
-    Payment pTemp = transaction.getPayment();
-    pTemp.setPaymentTotal(finalTotal);
-    transaction.setPayment(pTemp);
-
-    //debug method to print out class for paymentType
-    //TODO: set new strings for writing to transaction and printout
-    String pay = pTemp.getClass().getName();
-    System.out.println(pay);
-    //TODO: store will write to sales log/transaction log
-    //writing customer info to transaction  
-    BufferedWriter writeTotranscFile;
-    String cReturn = String.format("%n");
+  public void processTransaction(Transaction transaction) throws ParserConfigurationException, SAXException {
+    // Write transaction to database 
+    boolean success = false;
     try {
-      writeTotranscFile = new BufferedWriter(new FileWriter(transactionPath, true));
-
-      //write header
-      TransactionHeader hTemp = transaction.getTransactionHeader();
-      String f1 = String.format("%-10s%s", hTemp.getCustomerName(), hTemp.getTransactionTime());
-      writeTotranscFile.write(f1);
-      writeTotranscFile.write(System.getProperty("line.separator"));
-      
-      //write items
-      for (int i = 0; i < transaction.getNumTransItems(); i++) {
-        if (temp[i] == null) {
-          break;//break where element in TransactionItem list is null(empty)
-        }
-        String f2 = String.format("%-10s%s", temp[i].getProductUPC(), temp[i].getProdQuantity());
-        writeTotranscFile.write(f2);
-        writeTotranscFile.write(System.getProperty("line.separator"));
+        NetClientGet.postTransaction(transaction);
+        success = true;
+    }
+    finally {
+      if(!success) {
+          
+          System.out.println("failure");
+    
+//        TransactionItem[] temp = transaction.getTransactionItems();
+//        
+//        //writing customer info to transaction  
+//        BufferedWriter writeTotranscFile;
+//        String cReturn = String.format("%n");
+//        try {
+//          writeTotranscFile = new BufferedWriter(new FileWriter(transactionPath, true));
+//
+//          //write header
+//          TransactionHeader hTemp = transaction.getTransactionHeader();
+//          String f1 = String.format("%-10s%s", hTemp.getCustomerName(), hTemp.getTransactionDate());
+//          writeTotranscFile.write(f1);
+//          writeTotranscFile.write(System.getProperty("line.separator"));
+//
+//          //write items
+//          for (int i = 0; i < transaction.getNumTransItems(); i++) {
+//            if (temp[i] == null) {
+//              break;//break where element in TransactionItem list is null(empty)
+//            }
+//            String f2 = String.format("%-10s%s", temp[i].getProductUPC(), temp[i].getProdQuantity());
+//            writeTotranscFile.write(f2);
+//            writeTotranscFile.write(System.getProperty("line.separator"));
+//          }
+//
+//          //String pay = pTemp.getClass().getName();
+//      
+//      
+//          /*/write payment
+//          if (pTemp.getTypePayment().equals("CARD") || pTemp.getTypePayment().equals("Card") || pTemp.getTypePayment().equals("card")) {
+//            writeTotranscFile.write(pTemp.getTypePayment() + " " + pTemp.getCardNumber());
+//          } else {
+//            writeTotranscFile.write(pTemp.getTypePayment() + " $" + finTotal);
+//          }
+//          */
+//          //end transaction separator
+//          writeTotranscFile.write(System.getProperty("line.separator"));
+//          writeTotranscFile.write(System.getProperty("line.separator"));
+//
+//          writeTotranscFile.close();
+//        } catch (IOException ex) {
+//            Logger.getLogger(POST.class.getName()).log(Level.SEVERE, null, ex);
+//        }
       }
-
-      //String pay = pTemp.getClass().getName();
       
-      
-      /*/write payment
-      if (pTemp.getTypePayment().equals("CARD") || pTemp.getTypePayment().equals("Card") || pTemp.getTypePayment().equals("card")) {
-        writeTotranscFile.write(pTemp.getTypePayment() + " " + pTemp.getCardNumber());
-      } else {
-        writeTotranscFile.write(pTemp.getTypePayment() + " $" + finTotal);
-      }
-*/
-      //end transaction separator
-      writeTotranscFile.write(System.getProperty("line.separator"));
-      writeTotranscFile.write(System.getProperty("line.separator"));
-
-      writeTotranscFile.close();
-    } catch (IOException ex) {
-      Logger.getLogger(POST.class
-              .getName()).log(Level.SEVERE, null, ex);
+      //this.printInvoice(transaction);
     }
 
   }
 
-  //called by store to get the calculated invoice
-  public String getTransactionInvoice(Transaction transaction) {
+  private String getTransactionInvoice(Transaction transaction) {
     StringBuilder invoice = new StringBuilder();
 
     String customerName = transaction.getTransactionHeader().getCustomerName();
-    String transactionDate = transaction.getTransactionHeader().getTransactionTime();
+    Date transactionDate = transaction.getTransactionHeader().getTransactionDate();
     String itemName, upc;
     double price = 0, total = 0, change = 0;
     Payment payment = transaction.getPayment();
@@ -217,5 +195,9 @@ public class POST {
 
   public boolean isValidUPC(String upc) {
     return this.productCatalog.getProductByUPC(upc) != null;
+  }
+  
+  private void printInvoice(Transaction transaction) {
+    System.out.println(this.getTransactionInvoice(transaction));
   }
 }
