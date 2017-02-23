@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import POST.POST;
 import Products.ProductSpecification;
 import Store.Store;
 import Transaction.Payment;
@@ -26,21 +27,26 @@ public class GUI extends javax.swing.JFrame {
     /**
      * Creates new form GUI
      */
-    
-    private Date date = new Date();
-    private Store store;
-    private double total = 0;
-    private ArrayList<ProductSpecification> cart = new ArrayList<>();
+    private Date date;
+    private POST post;
+    private double total;
+    private List<ProductSpecification> cart;
     private String customerName;
     private Payment payment;
-    public GUI() {
-        try {
+
+    public GUI(POST post) {
+        /*try {
             this.store = new Store("Greary Street", "SellFoods");
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
+        this.date = new Date();
+        this.total = 0;
+        this.post = post;
+        this.cart = new ArrayList<>();
+        this.customerName = "";        
         initComponents();
     }
 
@@ -56,12 +62,14 @@ public class GUI extends javax.swing.JFrame {
         CustomerNameBox = new javax.swing.JTextField();
         CustomerName = new javax.swing.JLabel();
         ProductPanel = new javax.swing.JPanel();
-        UPCBox = new javax.swing.JComboBox<>();
-        for(int i = 0; i < store.getProductCatalog().getProductList().size(); i++){
-            UPCBox.addItem(store.getProductCatalog().getProductList().get(i).getProductUPC());
+        UPCBox = new javax.swing.JComboBox<String>();
+
+        List<ProductSpecification> products = post.getStore().getProductCatalog().getProductList();
+        for(ProductSpecification product : products) {
+            UPCBox.addItem(product.getProductUPC());
         }
         UPC = new javax.swing.JLabel();
-        QuantityBox = new javax.swing.JComboBox<>();
+        QuantityBox = new javax.swing.JComboBox<String>();
         Quantity = new javax.swing.JLabel();
         EnterButton = new javax.swing.JButton();
         InvoicePanel = new javax.swing.JPanel();
@@ -76,7 +84,7 @@ public class GUI extends javax.swing.JFrame {
         DateLabel = new javax.swing.JLabel();
         DateLabel.setText(date.toString());
         PaymentPanel = new javax.swing.JPanel();
-        PaymentTypeBox = new javax.swing.JComboBox<>();
+        PaymentTypeBox = new javax.swing.JComboBox<String>();
         PaymentType = new javax.swing.JLabel();
         Amount = new javax.swing.JLabel();
         AmountField = new javax.swing.JTextField();
@@ -93,7 +101,7 @@ public class GUI extends javax.swing.JFrame {
 
         UPC.setText("UPC");
 
-        QuantityBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99" }));
+        QuantityBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99" }));
         QuantityBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 QuantityBoxActionPerformed(evt);
@@ -208,7 +216,7 @@ public class GUI extends javax.swing.JFrame {
 
         PaymentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Payment"));
 
-        PaymentTypeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Check", "Credit" }));
+        PaymentTypeBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Cash", "Check", "Credit" }));
 
         PaymentType.setText("Payment Type");
 
@@ -307,33 +315,29 @@ public class GUI extends javax.swing.JFrame {
 
     private void EnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterButtonActionPerformed
         // TODO add your handling code here:
-        ProductSpecification selectedProduct = store.getProductCatalog().getProductByUPC(UPCBox.getSelectedItem().toString());
+        //Replace this business logic with a call to POST???
+        //ie. call POST to do a subtotal of the items
+        
+        ProductSpecification selectedProduct = post.getStore().getProductCatalog().getProductByUPC(UPCBox.getSelectedItem().toString());
         cart.add(selectedProduct);
-        jTextArea1.append(selectedProduct.getProductDesc() + " " + QuantityBox.getSelectedItem().toString()+ " $" + selectedProduct.getProductPrice()+ " $" + (selectedProduct.getProductPrice()*Integer.parseInt(QuantityBox.getSelectedItem().toString())) + "\n");
-        total += (selectedProduct.getProductPrice()*Integer.parseInt(QuantityBox.getSelectedItem().toString()));
+        jTextArea1.append(selectedProduct.getProductDesc() + " " + QuantityBox.getSelectedItem().toString() + " $" + selectedProduct.getProductPrice() + " $" + (selectedProduct.getProductPrice() * Integer.parseInt(QuantityBox.getSelectedItem().toString())) + "\n");
+        total += (selectedProduct.getProductPrice() * Integer.parseInt(QuantityBox.getSelectedItem().toString()));
         TotalValue.setText("$" + total);
     }//GEN-LAST:event_EnterButtonActionPerformed
 
     private void PayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayButtonActionPerformed
         // TODO add your handling code here:
-        if(Double.parseDouble(AmountField.getText()) < total){
+        //1. store into database by using netclient
+        //2. call post to print the invoice (ie. print to file)
+        if (Double.parseDouble(AmountField.getText()) < total) {
             JOptionPane.showMessageDialog(null, "You're payment input was less than the total", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        else{
+        } else {
             jTextArea1.setText("");
             TotalValue.setText("$0.00");
         }
     }//GEN-LAST:event_PayButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    public void start() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -356,7 +360,7 @@ public class GUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI().setVisible(true);
+                setVisible(true);
             }
         });
     }

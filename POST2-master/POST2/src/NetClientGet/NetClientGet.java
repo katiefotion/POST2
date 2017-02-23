@@ -23,17 +23,17 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class NetClientGet {
-    
-    public static int lastTransactionId = 0;
-    
-    public static List<ProductSpecification> getProducts() throws ParserConfigurationException, SAXException {
 
+    public static int lastTransactionId = 0;
+
+    public static List<ProductSpecification> getProducts()
+            throws ParserConfigurationException, SAXException {
         List<ProductSpecification> products = new ArrayList<>();
-        
+
         try {
 
             /*
-              GET
+             GET
              */
             URL urlProducts = new URL("http://localhost:8080/POST2_Server/webresources/com.post2entity.products");
             HttpURLConnection getConnProducts = (HttpURLConnection) urlProducts.openConnection();
@@ -54,19 +54,18 @@ public class NetClientGet {
             }
 
             /*
-            Following are 2 alternatives for accessing values in XML tree nodes
-            */
-            
+             Following are 2 alternatives for accessing values in XML tree nodes
+             */
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document doc = builder.parse(new ByteArrayInputStream(msg.getBytes()));
-            
+
             String upc, description;
             double unitPrice;
 
             /*
-            getElementsByTagName is guaranteed to retrieve nodes in the XML tree order
-            so the following 3 NodeLists are in sync
-            */
+             getElementsByTagName is guaranteed to retrieve nodes in the XML tree order
+             so the following 3 NodeLists are in sync
+             */
             NodeList upcs = doc.getElementsByTagName("upc");
             NodeList descriptions = doc.getElementsByTagName("description");
             NodeList unitPrices = doc.getElementsByTagName("unitPrice");
@@ -78,26 +77,26 @@ public class NetClientGet {
             }
 
             getConnProducts.disconnect();
-            
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         return products;
     }
-    
-    public static void postTransaction(Transaction t) throws ParserConfigurationException, SAXException {
-        
+
+    public static void postTransaction(Transaction t)
+            throws ParserConfigurationException, SAXException {
         try {
             /*
-                POST
+             POST
              */
             URL urlSale = new URL("http://localhost:8080/POST2_Server/webresources/com.post2entity.transactions");
-            
+
             HttpURLConnection postConnSale = (HttpURLConnection) urlSale.openConnection();
-            
+
             postConnSale.setDoOutput(true);
             postConnSale.setRequestMethod("POST");
             postConnSale.setRequestProperty("Content-Type", "application/xml");
@@ -107,10 +106,9 @@ public class NetClientGet {
             String paymentType = t.getPayment().getClass().getName();
             double total = t.getPayment().getPaymentTotal();
             int transactionId = ++lastTransactionId;
-            
-            String newSaleString = 
-                    
-                           "<transactions> \n"
+
+            String newSaleString
+                    = "<transactions> \n"
                     + "           <customerName>" + customerName + "</customerName> \n"
                     + "           <datetime>" + datetime + "</datetime> \n"
                     + "           <paymentType>" + paymentType + "</paymentType> \n"
@@ -128,7 +126,7 @@ public class NetClientGet {
             }
 
             postConnSale.disconnect();
-            
+
             URL urlSaleItem = new URL("http://localhost:8080/POST2_Server/webresources/com.post2entity.transactionitems");
 
             HttpURLConnection postConnSaleItem = (HttpURLConnection) urlSaleItem.openConnection();
@@ -137,45 +135,44 @@ public class NetClientGet {
             postConnSaleItem.setRequestProperty("Content-Type", "application/xml");
 
             TransactionItem[] transItems = t.getTransactionItems();
-            
-            for(int i = 0; i < t.getNumTransItems(); i++) {
-                
+
+            for (int i = 0; i < t.getNumTransItems(); i++) {
+
                 TransactionItem transItem = transItems[i];
-                
+
                 String upc = transItem.getProductUPC();
                 int quantity = transItem.getProdQuantity();
                 String description = "";
                 double unitPrice = 0.0;
-                
+
                 List<ProductSpecification> prods = getProducts();
                 for (ProductSpecification prod : prods) {
-                    if(prod.getProductUPC().equals(upc)) {
+                    if (prod.getProductUPC().equals(upc)) {
                         description = prod.getProductDesc();
                         unitPrice = prod.getProductPrice();
                     }
                 }
-                
-                String newSaleItemString = 
 
-                            "<transactionitems>  \n"
-                    + "          <products>  \n"
-                    + "              <description>" + description + "</description>  \n"
-                    + "              <unitPrice>" + unitPrice + "</unitPrice>  \n" 
-                    + "              <upc>" + upc + "</upc>  \n"
-                    + "          </products>  \n"     
-                    + "          <quantity>" + quantity + "</quantity>  \n"
-                    + "          <transactionitemsPK>  \n"
-                    + "              <transactionId>" + transactionId + "</transactionId>  \n" 
-                    + "              <upc>" + upc + "</upc>  \n"
-                    + "          </transactionitemsPK>  \n"
-                    + "          <transactions>  \n"
-                    + "              <customerName>" + customerName + "</customerName> \n"     
-                    + "              <datetime>" + datetime + "</datetime> \n"
-                    + "              <paymentType>" + paymentType + "</paymentType> \n"
-                    + "              <total>" + total + "</total> \n"
-                    + "              <transactionId>" + transactionId + "</transactionId> \n"
-                    + "          </transactions>  \n"
-                    + "      </transactionitems>";
+                String newSaleItemString
+                        = "<transactionitems>  \n"
+                        + "          <products>  \n"
+                        + "              <description>" + description + "</description>  \n"
+                        + "              <unitPrice>" + unitPrice + "</unitPrice>  \n"
+                        + "              <upc>" + upc + "</upc>  \n"
+                        + "          </products>  \n"
+                        + "          <quantity>" + quantity + "</quantity>  \n"
+                        + "          <transactionitemsPK>  \n"
+                        + "              <transactionId>" + transactionId + "</transactionId>  \n"
+                        + "              <upc>" + upc + "</upc>  \n"
+                        + "          </transactionitemsPK>  \n"
+                        + "          <transactions>  \n"
+                        + "              <customerName>" + customerName + "</customerName> \n"
+                        + "              <datetime>" + datetime + "</datetime> \n"
+                        + "              <paymentType>" + paymentType + "</paymentType> \n"
+                        + "              <total>" + total + "</total> \n"
+                        + "              <transactionId>" + transactionId + "</transactionId> \n"
+                        + "          </transactions>  \n"
+                        + "      </transactionitems>";
 
                 postOutputStream = postConnSaleItem.getOutputStream();
                 postOutputStream.write(newSaleItemString.getBytes());
@@ -185,7 +182,7 @@ public class NetClientGet {
                     throw new RuntimeException("Failed : HTTP error code : "
                             + postConnSaleItem.getResponseCode());
                 }
-                
+
             }
 
             postConnSaleItem.disconnect();
@@ -194,7 +191,5 @@ public class NetClientGet {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
     }
-
 }

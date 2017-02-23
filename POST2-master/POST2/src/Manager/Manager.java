@@ -25,10 +25,9 @@ public class Manager {
     startPOST();
     
     String[] arguments = new String[] {""};
-    GUI.main(arguments);
+    //GUI.main(arguments);
   }
 
   private void startPOST() {
-    this.store.getPost().start();
   }
 }

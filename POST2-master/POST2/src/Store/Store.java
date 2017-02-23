@@ -1,5 +1,6 @@
 package Store;
 
+import GUI.GUI;
 import Manager.Manager;
 import NetClientGet.NetClientGet;
 import POST.POST;
@@ -19,7 +20,9 @@ public class Store {
   private String storeAddress;
   private String storeName;
   private ProductCatalog catalog;
-  private POST post; //assume store only has one POST, otherwise this would be a list
+  
+  private POST post;
+  private GUI postGUI;
 
   public Store(String address, String name) throws ParserConfigurationException, SAXException {
     this.storeAddress = address;
@@ -27,6 +30,13 @@ public class Store {
     
     initializeCatalog(); //note, catalog needs to be initialized before passing store to post for now...
     this.post = new POST(this);
+    postGUI = new GUI(post);
+  }
+  
+  public void openStore() {
+    //String[] arguments = new String[] {""};
+    //GUI.main(arguments);
+      postGUI.start();
   }
 
   public POST getPost() {
@@ -58,10 +68,8 @@ public class Store {
   }
 
   private void initializeCatalog() throws ParserConfigurationException, SAXException {
-    
     List<ProductSpecification> products = NetClientGet.getProducts();
 
     this.catalog = new ProductCatalog(products);
   }
-
 }
