@@ -9,10 +9,10 @@ package Transaction;
  *
  * @author darrylraveche
  */
-
 public class CashPayment extends Payment {
-    public CashPayment(double total){
-    super(total);
-}
-    
+
+    public CashPayment(double total) {
+        super(total);
+    }
+
 }

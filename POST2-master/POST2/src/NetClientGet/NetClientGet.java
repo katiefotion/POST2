@@ -101,10 +101,16 @@ public class NetClientGet {
             postConnSale.setRequestMethod("POST");
             postConnSale.setRequestProperty("Content-Type", "application/xml");
 
-            String customerName = t.getTransactionHeader().getCustomerName();
+            /*String customerName = t.getTransactionHeader().getCustomerName();
             String datetime = t.getTransactionHeader().getTransactionTime();
             String paymentType = t.getPayment().getClass().getName();
             double total = t.getPayment().getPaymentTotal();
+            int transactionId = ++lastTransactionId;
+                    */
+            String customerName = t.getCustomerName();
+            String datetime = t.getTransactionTime();
+            String paymentType = t.getPaymentType();
+            double total = t.getPaymentTotal();
             int transactionId = ++lastTransactionId;
 
             String newSaleString
@@ -134,9 +140,11 @@ public class NetClientGet {
             postConnSaleItem.setRequestMethod("POST");
             postConnSaleItem.setRequestProperty("Content-Type", "application/xml");
 
+            //TransactionItem[] transItems = t.getTransactionItems();
             TransactionItem[] transItems = t.getTransactionItems();
-
-            for (int i = 0; i < t.getNumTransItems(); i++) {
+            int size = t.getNumTransItems();
+            
+            for (int i = 0; i < size; i++) {
 
                 TransactionItem transItem = transItems[i];
 

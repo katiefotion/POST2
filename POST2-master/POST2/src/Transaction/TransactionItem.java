@@ -10,7 +10,6 @@ public class TransactionItem {
     private String productUPC; 
     private int prodQuantity;
     
-    
     // Constructor with parameters
     public TransactionItem(String upc, int quantity) {
         this.productUPC = upc;

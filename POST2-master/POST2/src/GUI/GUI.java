@@ -8,7 +8,12 @@ package GUI;
 import POST.POST;
 import Products.ProductSpecification;
 import Store.Store;
+import Transaction.CardPayment;
+import Transaction.CashPayment;
+import Transaction.CheckPayment;
 import Transaction.Payment;
+import Transaction.Transaction;
+import Transaction.TransactionItem;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +35,7 @@ public class GUI extends javax.swing.JFrame {
     private Date date;
     private POST post;
     private double total;
-    private List<ProductSpecification> cart;
+    private List<TransactionItem> cart;
     private String customerName;
     private Payment payment;
 
@@ -316,27 +321,53 @@ public class GUI extends javax.swing.JFrame {
     private void EnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterButtonActionPerformed
         // TODO add your handling code here:
         //calculate subtotal
-        ProductSpecification selectedProduct = post.getProduct(UPCBox.getSelectedItem().toString());
+        //ProductSpecification selectedProduct = post.getProduct(UPCBox.getSelectedItem().toString());
+        String productUPC = UPCBox.getSelectedItem().toString();
         int productCount = Integer.parseInt(QuantityBox.getSelectedItem().toString());
+
+        TransactionItem item = new TransactionItem(productUPC, productCount);
         for (int i = 0; i < productCount; i++) {
-            cart.add(selectedProduct);
+            cart.add(item);
         }
         total = post.getSubTotal(cart);
-        
+
         //update UI
-        jTextArea1.append(selectedProduct.getProductDesc() + "     " + QuantityBox.getSelectedItem().toString() + "     $" + selectedProduct.getProductPrice() + "     $" + (selectedProduct.getProductPrice() * Integer.parseInt(QuantityBox.getSelectedItem().toString())) + "\n");
+        String productDesc = post.getProductDescription(productUPC);
+        double productUnitPrice = post.getProductPrice(productUPC);
+        double productPrice = productUnitPrice * productCount;
+        jTextArea1.append(productDesc + "     " + productCount + "     $" + productUnitPrice + "     $" + productPrice + "\n");
         TotalValue.setText("$" + total);
     }//GEN-LAST:event_EnterButtonActionPerformed
 
     private void PayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayButtonActionPerformed
         // TODO add your handling code here:
-        //1. store into database by using netclient
+        //1. store into database by using POST
         //2. call post to print the invoice (ie. print to file)
-        if (Double.parseDouble(AmountField.getText()) < total) {
-            JOptionPane.showMessageDialog(null, "You're payment input was less than the total", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
+        String customerName = CustomerNameBox.getText();
+        String transactionTime = new Date().toString();
+        Payment payment = null;
+
+        String paymentType = String.valueOf(PaymentTypeBox.getSelectedItem());
+        double paymentTotal = Double.parseDouble(AmountField.getText());
+
+        if (paymentTotal >= total) {
+            if (paymentType.equals("Cash")) {
+                payment = new CashPayment(paymentTotal);
+            } else if (paymentType.equals("Check")) {
+                payment = new CheckPayment(paymentTotal);
+            } else if (paymentType.equals("Credit")) {
+                payment = new CardPayment("xxx-xx-xxxx", paymentTotal);
+            }
+
+            Transaction transaction = new Transaction(cart, customerName, transactionTime, payment);
+            post.processTransaction(transaction);
+            post.printInvoice(transaction);
+
+            //clear UI
             jTextArea1.setText("");
             TotalValue.setText("$0.00");
+        } else {
+            JOptionPane.showMessageDialog(null, "You're payment input was less than the total", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_PayButtonActionPerformed
 
