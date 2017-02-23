@@ -146,7 +146,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="for(int i = 0; i &lt; store.getProductCatalog().getProductList().size(); i++){&#xd;&#xa;            UPCBox.addItem(store.getProductCatalog().getProductList().get(i).getProductUPC());&#xd;&#xa;        }"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="    &#xd;&#xa;List&lt;ProductSpecification&gt; products = post.getStore().getProductCatalog().getProductList();&#xd;&#xa;for(ProductSpecification product : products) {&#xd;&#xa;    UPCBox.addItem(product.getProductUPC());&#xd;&#xa;}"/>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>

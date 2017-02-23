@@ -43,11 +43,6 @@ public class POST {
     this.productCatalog = store.getProductCatalog();
   }
 
-  //TODO: remove
-  public void start() {
-    //initializeCatalog();
-  }
-
   //called to calculate total and store the transaction
   public void processTransaction(Customer customer, Transaction transaction) {
 
@@ -202,6 +197,10 @@ public class POST {
   }
 
   /* Helper classes to get info from database */
+  public Store getStore() {
+      return this.store;
+  }
+  
   public String getStoreName() {
     return this.store.getStoreName();
   }
