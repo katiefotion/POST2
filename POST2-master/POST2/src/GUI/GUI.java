@@ -36,17 +36,17 @@ public class GUI extends javax.swing.JFrame {
 
     public GUI(POST post) {
         /*try {
-            this.store = new Store("Greary Street", "SellFoods");
-        } catch (ParserConfigurationException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SAXException ex) {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+         this.store = new Store("Greary Street", "SellFoods");
+         } catch (ParserConfigurationException ex) {
+         Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (SAXException ex) {
+         Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+         }*/
         this.date = new Date();
         this.total = 0;
         this.post = post;
         this.cart = new ArrayList<>();
-        this.customerName = "";        
+        this.customerName = "";
         initComponents();
     }
 
@@ -315,13 +315,16 @@ public class GUI extends javax.swing.JFrame {
 
     private void EnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterButtonActionPerformed
         // TODO add your handling code here:
-        //Replace this business logic with a call to POST???
-        //ie. call POST to do a subtotal of the items
+        //calculate subtotal
+        ProductSpecification selectedProduct = post.getProduct(UPCBox.getSelectedItem().toString());
+        int productCount = Integer.parseInt(QuantityBox.getSelectedItem().toString());
+        for (int i = 0; i < productCount; i++) {
+            cart.add(selectedProduct);
+        }
+        total = post.getSubTotal(cart);
         
-        ProductSpecification selectedProduct = post.getStore().getProductCatalog().getProductByUPC(UPCBox.getSelectedItem().toString());
-        cart.add(selectedProduct);
-        jTextArea1.append(selectedProduct.getProductDesc() + " " + QuantityBox.getSelectedItem().toString() + " $" + selectedProduct.getProductPrice() + " $" + (selectedProduct.getProductPrice() * Integer.parseInt(QuantityBox.getSelectedItem().toString())) + "\n");
-        total += (selectedProduct.getProductPrice() * Integer.parseInt(QuantityBox.getSelectedItem().toString()));
+        //update UI
+        jTextArea1.append(selectedProduct.getProductDesc() + "     " + QuantityBox.getSelectedItem().toString() + "     $" + selectedProduct.getProductPrice() + "     $" + (selectedProduct.getProductPrice() * Integer.parseInt(QuantityBox.getSelectedItem().toString())) + "\n");
         TotalValue.setText("$" + total);
     }//GEN-LAST:event_EnterButtonActionPerformed
 

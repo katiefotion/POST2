@@ -31,7 +31,7 @@ import java.sql.Time;
  * @author Felix Chan Lee
  */
 public class POST {
-  private final String transactionPath; //TODO: remove
+  private final String transactionPath; //TODO: use to write invoice to file (maybe change name)
 
   private ProductCatalog productCatalog;
   private Store store;
@@ -195,14 +195,31 @@ public class POST {
 
     return invoice.toString();
   }
+  
+  /* logic helper functions */
+  public double getSubTotal(List<ProductSpecification> products) {
+      double total = 0;
+      
+      for(ProductSpecification product : products) {
+          total += product.getProductPrice();
+      }
+      
+      return total;
+  }
 
-  /* Helper classes to get info from database */
+  /* Store helper functions */
   public Store getStore() {
       return this.store;
   }
   
   public String getStoreName() {
     return this.store.getStoreName();
+  }
+  
+  /* Product helper functions */
+  
+  public ProductSpecification getProduct(String upc) {
+      return isValidUPC(upc) ? this.productCatalog.getProductByUPC(upc) : null;
   }
 
   //return N/A if not product found

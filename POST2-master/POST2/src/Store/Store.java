@@ -1,12 +1,10 @@
 package Store;
 
 import GUI.GUI;
-import Manager.Manager;
 import NetClientGet.NetClientGet;
 import POST.POST;
 import Products.ProductCatalog;
 import Products.ProductSpecification;
-import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
@@ -30,12 +28,10 @@ public class Store {
     
     initializeCatalog(); //note, catalog needs to be initialized before passing store to post for now...
     this.post = new POST(this);
-    postGUI = new GUI(post);
+    postGUI = new GUI(this.post);
   }
   
   public void openStore() {
-    //String[] arguments = new String[] {""};
-    //GUI.main(arguments);
       postGUI.start();
   }
 
