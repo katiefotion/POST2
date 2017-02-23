@@ -11,7 +11,12 @@ import Store.Store;
 import Transaction.Transaction;
 import Transaction.TransactionItem;
 import Transaction.Payment;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
@@ -23,8 +28,10 @@ public class POST {
     
   private ProductCatalog productCatalog;
   private Store store;
+  private String transactionPath; 
 
   public POST(Store store) {
+    transactionPath = "TextFiles/transaction.txt";
     this.store = store;    
     this.productCatalog = store.getProductCatalog();
   }
@@ -145,6 +152,21 @@ public class POST {
   }
   
   public void printInvoice(Transaction transaction) {
-    System.out.println(this.getTransactionInvoice(transaction));
+    
+      BufferedWriter writeFile;
+      String print = this.getTransactionInvoice(transaction);
+      
+      try {
+          writeFile = new BufferedWriter(new FileWriter(transactionPath, false));
+          
+          writeFile.append(print);
+          
+          writeFile.flush();
+      } 
+      catch (IOException ex) {
+          Logger.getLogger(POST.class.getName()).log(Level.SEVERE, null, ex);
+      }
+      
+      
   }
 }

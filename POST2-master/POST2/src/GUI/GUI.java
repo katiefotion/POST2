@@ -63,10 +63,8 @@ public class GUI extends javax.swing.JFrame {
         CustomerName = new javax.swing.JLabel();
         ProductPanel = new javax.swing.JPanel();
         UPCBox = new javax.swing.JComboBox<>();
-
-        List<ProductSpecification> products = post.getStore().getProductCatalog().getProductList();
-        for(ProductSpecification product : products) {
-            UPCBox.addItem(product.getProductUPC());
+        for(int i = 0; i < post.getStore().getProductCatalog().getProductList().size(); i++){
+            UPCBox.addItem(post.getStore().getProductCatalog().getProductList().get(i).getProductUPC());
         }
         UPC = new javax.swing.JLabel();
         QuantityBox = new javax.swing.JComboBox<>();
@@ -89,25 +87,18 @@ public class GUI extends javax.swing.JFrame {
         Amount = new javax.swing.JLabel();
         AmountField = new javax.swing.JTextField();
         PayButton = new javax.swing.JButton();
+        CCLabel = new javax.swing.JLabel();
+        CCField = new javax.swing.JTextField();
+        CCField.setEnabled(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("POST Terminal");
 
-        CustomerNameBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CustomerNameBoxActionPerformed(evt);
-            }
-        });
+        CustomerNameBox.setText("Bozo the Clown");
 
         CustomerName.setText("Customer Name");
 
         ProductPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Product"));
-
-        UPCBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UPCBoxActionPerformed(evt);
-            }
-        });
 
         UPC.setText("UPC");
 
@@ -227,10 +218,21 @@ public class GUI extends javax.swing.JFrame {
         PaymentPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Payment"));
 
         PaymentTypeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cash", "Check", "Credit" }));
+        PaymentTypeBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PaymentTypeBoxActionPerformed(evt);
+            }
+        });
 
         PaymentType.setText("Payment Type");
 
         Amount.setText("Amount");
+
+        AmountField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AmountFieldActionPerformed(evt);
+            }
+        });
 
         PayButton.setText("Pay");
         PayButton.addActionListener(new java.awt.event.ActionListener() {
@@ -239,36 +241,50 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        CCLabel.setText("Credit Card #");
+
         javax.swing.GroupLayout PaymentPanelLayout = new javax.swing.GroupLayout(PaymentPanel);
         PaymentPanel.setLayout(PaymentPanelLayout);
         PaymentPanelLayout.setHorizontalGroup(
             PaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PaymentPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(PaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(PayButton)
+                .addContainerGap()
+                .addGroup(PaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PaymentPanelLayout.createSequentialGroup()
-                        .addComponent(PaymentType, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PaymentTypeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Amount)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(PaymentType, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PayButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AmountField, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(PaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PaymentPanelLayout.createSequentialGroup()
+                        .addGroup(PaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(CCLabel)
+                            .addComponent(Amount))
+                        .addGap(18, 18, 18)
+                        .addGroup(PaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AmountField, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CCField, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PaymentPanelLayout.createSequentialGroup()
+                        .addComponent(PaymentTypeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(156, 156, 156))))
         );
         PaymentPanelLayout.setVerticalGroup(
             PaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PaymentPanelLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(PaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addContainerGap()
+                .addGroup(PaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(PaymentTypeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PaymentType)
+                    .addComponent(PaymentType))
+                .addGap(40, 40, 40)
+                .addGroup(PaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Amount)
-                    .addComponent(AmountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(PayButton)
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(AmountField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PayButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PaymentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CCField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CCLabel)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -291,7 +307,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(DateLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(PaymentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(PaymentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -321,11 +337,9 @@ public class GUI extends javax.swing.JFrame {
 
     private void QuantityBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuantityBoxActionPerformed
         
-        
     }//GEN-LAST:event_QuantityBoxActionPerformed
 
     private void EnterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnterButtonActionPerformed
-        
         ProductSpecification selectedProduct = post.getStore().getProductCatalog().getProductByUPC(UPCBox.getSelectedItem().toString());
         TransactionItem transItem = new TransactionItem(UPCBox.getSelectedItem().toString(), Integer.parseInt(QuantityBox.getSelectedItem().toString()));
         cart[numTransItems] = transItem;
@@ -336,20 +350,22 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_EnterButtonActionPerformed
 
     private void PayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayButtonActionPerformed
-        
-        if (Double.parseDouble(AmountField.getText()) < total) {
-            JOptionPane.showMessageDialog(null, "You're payment input was less than the total", "Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-            jTextArea1.setText("");
-            TotalValue.setText("$0.00");
-        }
+	if (!AmountField.getText().isEmpty()) {
+		if (Double.parseDouble(AmountField.getText()) < total) {
+            		JOptionPane.showMessageDialog(null, "You're payment input was less than the total", "Error", JOptionPane.ERROR_MESSAGE);
+        	} else {
+            		jTextArea1.setText("");
+            		TotalValue.setText("$0.00");
+        	}
+	}
         
         if (PaymentTypeBox.getSelectedItem().toString().equals("Cash"))
             payment = new CashPayment(total);
         else if (PaymentTypeBox.getSelectedItem().toString().equals("Check"))
             payment = new CheckPayment(total);
         else if (PaymentTypeBox.getSelectedItem().toString().equals("Credit"))
-            payment = new CardPayment("xxxxxxxxx", total); 
+            payment = new CardPayment(CCField.getText(), total); 
+        customerName = CustomerNameBox.getText();
         
         TransactionHeader header = new TransactionHeader(customerName, date);
         Transaction t = new Transaction(header, cart, numTransItems, payment);
@@ -365,15 +381,25 @@ public class GUI extends javax.swing.JFrame {
         total = 0;
         CustomerNameBox.setText("");
         AmountField.setText("");
+        
     }//GEN-LAST:event_PayButtonActionPerformed
 
-    private void CustomerNameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerNameBoxActionPerformed
-        customerName = CustomerNameBox.getText();
-    }//GEN-LAST:event_CustomerNameBoxActionPerformed
-
-    private void UPCBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UPCBoxActionPerformed
+    private void PaymentTypeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentTypeBoxActionPerformed
+        // TODO add your handling code here:
+        if(PaymentTypeBox.getSelectedItem().toString() == "Cash" || PaymentTypeBox.getSelectedItem().toString() == "Check"){
+            AmountField.setEnabled(true);
+            CCField.setEnabled(false);
+        }
+        else if(PaymentTypeBox.getSelectedItem().toString() == "Credit"){
+            AmountField.setEnabled(false);
+            CCField.setEnabled(true);
+        }
         
-    }//GEN-LAST:event_UPCBoxActionPerformed
+    }//GEN-LAST:event_PaymentTypeBoxActionPerformed
+
+    private void AmountFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AmountFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AmountFieldActionPerformed
 
     public void start(POST post) {
         try {
@@ -403,9 +429,12 @@ public class GUI extends javax.swing.JFrame {
         });
     }
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Amount;
     private javax.swing.JTextField AmountField;
+    private javax.swing.JTextField CCField;
+    private javax.swing.JLabel CCLabel;
     private javax.swing.JLabel CustomerName;
     private javax.swing.JTextField CustomerNameBox;
     private javax.swing.JLabel DateLabel;

@@ -1,0 +1,6 @@
+
+SellFoods
+KATIE Thu Feb 23 15:48:11 PST 2017
+Tomato @ 2.5 2.50
+Paper towels @ 7.99 10.49
+----Total 10.49
