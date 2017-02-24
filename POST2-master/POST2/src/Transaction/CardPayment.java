@@ -19,5 +19,9 @@ public class CardPayment extends Payment{
         super(total);
         this.cardNumber = card;
     }
+    
+    public String getCardNumber() {
+        return cardNumber; 
+    }
 }
 

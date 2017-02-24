@@ -8,6 +8,7 @@ package POST;
 import NetClientGet.NetClientGet;
 import Products.ProductCatalog;
 import Store.Store;
+import Transaction.CardPayment;
 import Transaction.Transaction;
 import Transaction.TransactionItem;
 import Transaction.Payment;
@@ -97,8 +98,9 @@ public class POST {
             .append("\n");
 
     //payment
-    String paymentType = payment.getClass().getName();
-    if (paymentType.equals("CASH")) {
+    String paymentType = payment.getClass().getName().replace("Transaction.", "").replace("Payment", "");
+    System.out.println(paymentType);
+    if (paymentType.equals("Cash")) {
 
       invoice.append("Amount Tendered: ");
 
@@ -117,11 +119,11 @@ public class POST {
                 .append("\n");
       }
 
-    } else if (paymentType.equals("CHECK")) {
+    } else if (paymentType.equals("Check")) {
       invoice.append("Paid by Check\n");
-    } else if (paymentType.equals("CARD")) {
+    } else if (paymentType.equals("Card")) {
       invoice.append("Credit Card: ")
-              //.append(transaction.getPayment().getCardNumber())
+              .append(((CardPayment)(transaction.getPayment())).getCardNumber())
               .append("\n");
     }
 

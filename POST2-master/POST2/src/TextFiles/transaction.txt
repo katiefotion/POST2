@@ -1,6 +1,12 @@
 
 SellFoods
-KATIE Thu Feb 23 15:48:11 PST 2017
-Tomato @ 2.5 2.50
-Paper towels @ 7.99 10.49
-----Total 10.49
+Group 2 Thu Feb 23 15:55:33 PST 2017
+Paper towels @ 7.99 31.96
+Baked beans @ 1.78 33.74
+Tomato @ 2.5 38.74
+----Total 38.74
+Amount tendered: 38.74
+Amount returned: 0.00
+
+
+
