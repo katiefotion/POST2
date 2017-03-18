@@ -4,10 +4,13 @@ class Prototype extends CI_Controller {
 
     public function index() {
         $this->load->model('categories_model');
-        $categories = $this->categories_model->get_categories();
+        $this->load->model('items_model');
+
+        $data['categories'] = $this->categories_model->get_categories();
         $data['cat']=$this->input->post('category');
         $data['title'] = "vertical prototype"; 
-        $data['categories'] = $categories; 
+        $data['items'] = $this->items_model->get_items($data['cat']);
+ 
 
         $this->load->view('templates/header', $data);
         $this->load->view('prototype/prototype', $data);
