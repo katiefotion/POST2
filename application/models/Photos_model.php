@@ -11,7 +11,7 @@ class Photos_model extends CI_Model {
     {
         $query = $this->db->get_where('photos', array('id' => $id));
 
-        return $row = $query->row();
+        return $query->row();
     }
 
 

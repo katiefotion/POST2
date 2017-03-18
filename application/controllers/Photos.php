@@ -13,7 +13,7 @@ class Photos extends CI_Controller {
         
         // returned data was good, load data for the view handler
         // TODO: add image type to database and set header accordingly
-        $data['header'] = "Content-type: image/jpg";
+        $data['header'] = "Content-type: image/$photo_data->content_type";
         $data['photo'] = $photo_data->photo;
 
         // let the view do what it does - send an image to the client
