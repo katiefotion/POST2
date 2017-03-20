@@ -7,8 +7,8 @@ class Items_model extends CI_Model {
         $this->load->database();
     }
 
-    public function get_items($id)
+    public function get_items($category_id)
     {
-        return $this->db->get_where('items', array('category_id' => $id))->result();
+        return $this->db->get_where('items', array('category_id' => $category_id))->result();
     }
 }
