@@ -1,18 +1,16 @@
 <!DOCTYPE html>
+<?php $this->load->helper('url');?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <?php 
-            $this->load->helper('url');
-            echo '<base href="' . base_url() . '">' ; ?>
         <title><?php echo $title; ?></title>
 
         <!-- Bootstrap -->
-        <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/style.css" rel="stylesheet">
+        <link href="<?= base_url('assets/bootstrap/css/bootstrap.min.css');?>" rel="stylesheet">
+        <link href="<?= base_url('assets/style.css');?>" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
