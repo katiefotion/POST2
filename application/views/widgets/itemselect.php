@@ -1,4 +1,3 @@
-
 <div class="panel">
     <div class="form-inline">
         <div class="form-group">
