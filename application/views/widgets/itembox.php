@@ -14,12 +14,12 @@
                 <div class = "col-md-8">
                     <?php
                     echo "<h3><strong>Item name: </strong>$item->name</h3>";
-                    echo "<strong>Description : </strong>";
-                    echo "$item->description" . anchor($uri," ...Read More"); ?>
+                    echo "<strong>Description : </strong>$item->description ...<br>";
+                    echo anchor($uri,"Read More","class = 'pull-right'"); ?>
                 </div>
                 <div class = "col-md-2">
                     <h4>Price: $<?= number_format($item->price, 2);?></h4>
-                    <a href="#" class="btn btn-default btn-block btn-wrap" role="button">Buy Now! (goes nowhere in the prototype)</a>
+                    <a href="#" class="btn btn-default btn-block btn-wrap"  role="button">Buy Now! (goes nowhere in the prototype)</a>
                 </div>
             </div>
         </div>
