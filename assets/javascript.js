@@ -4,6 +4,3 @@
  * and open the template in the editor.
  */
 
-function myFunction(){
-    return p1 * p2;
-}
