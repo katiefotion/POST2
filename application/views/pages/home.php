@@ -22,5 +22,8 @@
                 </div>
             </div>
         </div>
-    </div>
+        <div class="col-md-3">
+            <a href="<?php echo site_url('prototype'); ?>" class="btn btn-default btn-block" role="button">Take me to the vertical prototype!</a>
+        </div>
+    </div>   
 </div>
