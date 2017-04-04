@@ -1,37 +1,46 @@
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 30px;
-
+    /* Margin bottom by footer height */
+    margin-bottom: 41px;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 41px;
 }
 .container-main{
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
-.container-footer{
+
+.min-lr-pad{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.footer-text{
     background-color: black;
     color: white;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  /* Set the fixed height of the footer here */
-  height: 30px;
-}
+
 .btn-wrap{
     white-space:normal !important;
     word-wrap:break-word; 
 }
 
 .navbar {
-    margin-bottom: 0px;
+    margin-bottom: 5px;
 }
 
 .sfsu-notice{
     margin-bottom: 0px;
+}
+.home-banner{
+    color: yellow !important;
 }

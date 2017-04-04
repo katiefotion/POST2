@@ -1,6 +1,6 @@
-<div class = "container">
+<div class = "container-fluid">
     <div class = "row">
-        <div class = "col-md-3">
+        <div class = "col-md-3 min-lr-pad">
             <?php
             $path = site_url("dbimg/$item->photo");
             echo "<img src='$path' class='img-responsive'>";

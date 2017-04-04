@@ -23,7 +23,8 @@ $this->load->helper('html');
         <![endif]-->
     </head>
     <body>
-        <div class="container container-main">
+        <div class="container-fluid container-main">
             <?php
+            $this->load->view('widgets/sfsu_notice'); 
             $this->load->view('widgets/navbar');
-            $this->load->view('widgets/sfsu_notice'); ?>
+            ?>
