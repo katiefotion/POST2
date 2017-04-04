@@ -21,8 +21,11 @@ body {
 }
 
 .min-lr-pad{
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.min-b-pad{
+    padding-bottom: 0px;
 }
 .footer-text{
     background-color: black;
@@ -35,7 +38,7 @@ body {
 }
 
 .navbar {
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .sfsu-notice{
