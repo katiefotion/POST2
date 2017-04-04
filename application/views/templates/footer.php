@@ -1,24 +1,5 @@
-</div>
-<div class="panel footer">
-    <div class="panel-body footer-text">
-        <div class="container-fluid">
-            <div class="row footer-text">
-                <div class="col-md-4 text-center">
-                    <?= anchor('privacy', 'privacy policy'); ?>
-                </div>
-                <div class="col-md-4">
-                    <p class="text-center">copyright 2017</p>
-                </div>
-                <div class="col-md-4 text-center">
-                    <?= anchor('terms', 'terms of use'); ?>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
+</div> <!--close out the container--> 
+<?php $this->load->view('widgets/terms_and_copyright'); ?>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
