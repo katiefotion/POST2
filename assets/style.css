@@ -1,4 +1,37 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 30px;
+
+}
+.container-main{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.container-footer{
+    background-color: black;
+    color: white;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+}
 .btn-wrap{
     white-space:normal !important;
     word-wrap:break-word; 
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+.sfsu-notice{
+    margin-bottom: 0px;
 }
