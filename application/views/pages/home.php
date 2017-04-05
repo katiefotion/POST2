@@ -6,7 +6,9 @@
                 <h1 class="home-banner">Coming Soon!</h1>
             </div>
             <div class="col-md-8">
-                <h1 class="text-center home-banner">Student to Student Shopping!</h1>
+                <h1 class="text-center home-banner">GatorSell, a website exclusively produced for the advantages of SFSU students, has user perks of selling and buying items.</h1>
+                <button type="button" onclick="">Buy</button>
+                <button type="button" onclick="">Sell</button>
             </div>
         </div>
     </div>
