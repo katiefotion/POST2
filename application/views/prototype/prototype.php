@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <h1>Vertical prototype for Team 10</h1>
     <div class="row">
         <div class="col-md-6">
