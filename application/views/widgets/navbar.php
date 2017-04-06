@@ -5,7 +5,7 @@
     $links = array(
         array('name'=>'Home','uri' => ''),
         array('name'=>'V-Prototype','uri' => 'prototype'),
-        array('name'=>'Browse Items','uri' => 'about'),
+        array('name'=>'Browse Items','uri' => 'prototype'),
         array('name'=>'Sell','uri' => 'about'),
         array('name'=>'Acount','uri' => 'SellerProfile'),
         array('name'=>'About','uri' => 'about'),
