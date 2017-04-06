@@ -32,7 +32,7 @@
 
                     <div class="form-group">
                         <label for="photo">Photo:</label>
-                        <input type="photo" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                        <input type="file" class="form-control-file" id="photo" aria-describedby="fileHelp">
                         <small id="fileHelp" class="form-text text-muted">File size must be under 4MB.</small>
                     </div>
                 </div>
