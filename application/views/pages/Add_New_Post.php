@@ -19,10 +19,10 @@
                 <div class="form-group">
                     <label for="category">Category:</label>
                     <select class="form-control" id="category">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                        <option>Books</option>
+                        <option>Games</option>
+                        <option>Furniture</option>
+                        <option>Electronics</option>
                     </select>
 
                     <div class="form-group">
@@ -47,17 +47,17 @@
         
         <div class = "col-md-6">
             
-            <h2><strong>Safe Meeting: </h2>
+            <h2>Safe Meeting: </h2>
                      <div class="form-group">
                     <label for="location">Location:</label>
                     <select class="form-control" id="category", aria-describedby="fileHelp">
                           <small id="fileHelp" class="form-text text-muted">Choose at least 2 options that are convient for you:</small>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                        <option>Ceasar Chavez</option>
+                        <option>Cafe Russo</option>
+                        <option>Library</option>
+                        <option>Quad</option>
                     </select>
-      
+                    <h2>TODO: Maps go here<h2>
         </div>
  </div>
       <div class = "row">
