@@ -4,7 +4,7 @@
     }
     $links = array(
         array('name'=>'Home','uri' => ''),
-        array('name'=>'V-Prototype','uri' => 'prototype'),
+        array('name'=>'Buy','uri' => 'prototype'),
         array('name'=>'About','uri' => 'about'),
     );
 ?>
