@@ -72,9 +72,9 @@
     <script>
         
       function initMap() {
-        var uluru = {lat: 37.721897, lng: -122.476111};
+        var uluru = {lat: 37.722558, lng: -122.4780799};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
+          zoom: 16,
           center: uluru
         });
         var marker = new google.maps.Marker({
@@ -92,14 +92,17 @@
         </div>
     </div>
                         <div class = "row">
-                            <div class = "col-md-12">
+                            <div class = "col-md-5"> </div>
+                            Still need to add href to Cancel Button
+                                                            <div class = "col-md-1"> 
+                       <a href="#" class="btn btn-danger btn-block" role="button">Cancel</a>
+</div>
+                                                            <div class = "col-md-1"> 
 
-                                <h2><strong>TODO: Add CANCEL & ADD buttons</h2>
-
-                                <a href="#" class="btn btn-default btn-block btn-default" role="button">Cancel</a>
-                                <a href="#" class="btn btn-default btn-block btn-wrap" role="button">Add</a>
-
+                                <button type="submit" class="btn btn-success btn-block">Add</button>
+                                </div>
+                             <div class = "col-md-5"> </div>
                             </div>
-                        </div>
+                    
 </div>
 
