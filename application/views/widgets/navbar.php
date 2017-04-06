@@ -4,7 +4,10 @@
     }
     $links = array(
         array('name'=>'Home','uri' => ''),
-        array('name'=>'Buy','uri' => 'prototype'),
+        array('name'=>'V-Prototype','uri' => 'prototype'),
+        array('name'=>'Browse Items','uri' => 'prototype'),
+        array('name'=>'Sell','uri' => 'about'),
+        array('name'=>'Acount','uri' => 'SellerProfile'),
         array('name'=>'About','uri' => 'about'),
     );
 ?>
@@ -31,8 +34,8 @@
                 ?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="<?= site_url('Register'); ?>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="<?= site_url('Login'); ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </div>
