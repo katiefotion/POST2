@@ -26,16 +26,19 @@
                 <div class=" col-sm-3"></div>
                 <div class="col-sm-9">
                     <?php
+                        
                         echo "<li>Post items to sell to SFSU students</li>";
                         echo "<li>Access <a href=\"#\">Safe Meeting</a> locations</li>";
                         echo "<li>All your details saved for fast posting</li>";
                         echo "<li>And more!</li><br>";
                     ?>
                 </div>
-                
-                <p class = "text-center"><a href="#" style="font-size: large"
-                    class="btn btn-default" role="button">Register Now</a>
-                </p>    
+                <?php
+                    $path = site_url("/Register");
+                    echo "<p class=\"text-center\"><a href='$path' "
+                            . "style=\"font-size: large\" class=\"btn btn-default\""
+                            . "  role=\"button\">Register Now</a></p>";
+                ?>   
             
         </div>
     </div>
