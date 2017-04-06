@@ -67,15 +67,14 @@
                     <option>Library</option>
                     <option>Quad</option>
                 </select>
-                <h2>TODO: Maps go here<h2>
-
-   <h3>My Google Maps Demo</h3>
+                </br>
     <div id="map"></div>
     <script>
+        
       function initMap() {
-        var uluru = {lat: -25.363, lng: 131.044};
+        var uluru = {lat: 37.721897, lng: -122.476111};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
+          zoom: 15,
           center: uluru
         });
         var marker = new google.maps.Marker({
