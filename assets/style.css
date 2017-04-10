@@ -47,3 +47,7 @@ body {
 .home-banner{
     color: yellow !important;
 }
+     #map {
+        height: 400px;
+        width: 100%;
+       }
