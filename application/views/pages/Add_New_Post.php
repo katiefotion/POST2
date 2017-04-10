@@ -1,12 +1,4 @@
 
- <head>
-    <style>
-      #map {
-        height: 400px;
-        width: 100%;
-       }
-    </style>
-  </head>
 <?php
     $categories = array(
         array('id' => '', 'category' => 'Furniture'),
