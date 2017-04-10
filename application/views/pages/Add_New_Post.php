@@ -7,7 +7,21 @@
        }
     </style>
   </head>
-
+<?php
+    $categories = array(
+        array('id' => '', 'category' => 'Furniture'),
+        array('id' => '', 'category' => 'Books'),
+        array('id' => '', 'category' => 'Video Games'),
+        array('id' => '', 'category' => 'Other'),
+    );
+    
+    $locations = array(
+        array('location' => "Quad"),
+        array('location' => "Ceasar Chavez"),
+        array('location' => "Library"),
+        array('location' => "Cafe Russo"),
+    );
+?>
 <div class = "container-fluid">
 
     <div class = "row">
@@ -28,11 +42,11 @@
                 <div class="form-group">
                     <label for="category">Category:</label>
                     <select class="form-control" id="category">
-                        <option>Books</option>
-                        <option>Games</option>
-                        <option>Furniture</option>
-                        <option>Electronics</option>
-                        <option>Other</option>
+                        
+                    <?php foreach ($categories as $cat){
+                         echo  "<option>$cat[category]</option>";
+                    } ?>
+              
                     </select>
 
                     <div class="form-group">
@@ -43,13 +57,10 @@
                     <div class="form-group">
                         <label for="photo">Photo:</label>
                         <input type="file" class="form-control-file" id="photo" aria-describedby="fileHelp">
-                        <small id="fileHelp" class="form-text text-muted">File size must be under 4MB.</small>
+                        <small id="fileHelp" class="form-text ">File size must be under 4MB.</small>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="other">Other:</label>
-                    <input type="other" class="form-control" id="other">
-                </div>
+            
 
             </form>
 
@@ -60,12 +71,12 @@
             <h2>Safe Meeting: </h2>
             <div class="form-group">
                 <label for="location">Location:</label>
-                <select class="form-control" id="category", aria-describedby="fileHelp">
+                <select class="form-control" id="locations", aria-describedby="fileHelp">
                     <small id="fileHelp" class="form-text text-muted">Choose at least 2 options that are convient for you:</small>
-                    <option>Ceasar Chavez</option>
-                    <option>Cafe Russo</option>
-                    <option>Library</option>
-                    <option>Quad</option>
+                    <?php foreach ($locations as $loc){
+                         echo  "<option>$loc[location]</option>";
+                    } ?>
+
                 </select>
                 </br>
     <div id="map"></div>
