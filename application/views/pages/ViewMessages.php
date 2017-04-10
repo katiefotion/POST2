@@ -1,29 +1,35 @@
-<h1>Messages</h1>
-<p>Sort By:</p>
-<button>Date</button>
-<button>Item</button>
-<button>Messenger</button>
-<table>
-    <thead>
+<div class="container-fluid">
+  <h1>Messages</h1>
+  <p>View By:</p>
+  <button type="button" onclick="">Date</button>
+  <button type="button" onclick="">Item</button>
+  <button type="button" onclick="">Messenger</button>
+  <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th></th>
         <th>Date</th>
         <th>Message</th>
         <th>Item</th>
         <th>Messenger</th>
+      </tr>
     </thead>
     <tbody>
-            <?php 
-                $sql = "SELECT * FROM Messages";
-                $qry = mysql_query($sql);
-
-                while($row = mysql_fetch_array($qry)){
-                    echo "<tr>
-                            <td><input type='checkbox' name='row_id[]' id='rowid_<?php echo $id ?>' value='<?php echo $id ?>' />
-                            <td>$row[date]</td>
-                            <td>$row[message]</td>
-                            <td>$row[item]</td>
-                            <td>$row[messenger]</td>
-                        </tr>";
-                }
-            ?>
+      <tr>
+        <td><input type="checkbox" value=""></td>
+        <td>3/14/17</td>
+        <td>I would like to buy that</td>
+        <td>Box of Cigarettes</td>
+        <td>Mike Smith</td>
+      </tr>
+      <tr>
+        <td><input type="checkbox" value=""></td>
+        <td>3/15/17</td>
+        <td>Does it come in blue?</td>
+        <td>Bowling Ball</td>
+        <td>Sally King</td>
+      </tr>
     </tbody>
-</table>
+  </table>
+  <button type="button" onclick="">Delete</button>
+</div>
