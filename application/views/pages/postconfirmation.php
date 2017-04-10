@@ -1,22 +1,10 @@
 
-<head>
-    <style>
-        .center {
-            text-align: center;
-        }
-        .right {
-            text-align: right;
-        }
-
-    </style>
-</head>
-
 <div class="containter-fluid">
-    <div class="center">
+    <div class="text-center">
         <h1>Thank you for posting!</h1> 
     </div>
 
-    <h2>Review</h2>
+    <h2>Review:</h2>
 
     <div class = "row">
         <div class = "col-md-3 min-lr-pad">
@@ -27,7 +15,7 @@
         </div>
         <div class = "col-md-7">
             <?php
-            echo "<h2><strong>Item name: </strong>$item->name</h2>";
+            echo "<h2><strong>Item Name: </strong>$item->name</h2>";
             echo "<h3><strong>Description </strong></h3><br>";
             echo "<p>$item->description</p>";
             ?>
@@ -37,7 +25,7 @@
         </div>
     </div>
 
-    <div class="right">
+    <div class="text-right">
         <button type="button" class="btn btn-outline-primary">Click here to edit</button>
     </div>
 </div>
