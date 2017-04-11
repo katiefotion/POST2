@@ -9,7 +9,7 @@ class Categories_model extends CI_Model {
 
     public function get_categories()
     {
-        $query = $this->db->get('categories')->result();
+        $query = $this->db->get('categories')->result_array();
 
         return $query;
     }
