@@ -3,10 +3,11 @@ if (!isset($currentPage)) {
     $currentPage = "";
 }
 $links = array(
-    array('name' => 'Browse', 'uri' => 'prototype'),
+    array('name' => 'Browse', 'uri' => 'items'),
     array('name' => 'Sell', 'uri' => 'Add_New_Post'),
     array('name' => 'About', 'uri' => 'about'),
 );
+$numMessages = 3;
 ?>
 
 <nav class="min-b-margin navbar-inverse">
@@ -31,15 +32,19 @@ $links = array(
                 }
                 ?>
             </ul>
-            <form class="navbar-form navbar-left">
+            <ul>
+                <?php $this->load->view('widgets/navBarSearch',array('categories'=>$categories,'selected'=>$selected));?>
+            </ul>
+<!--            <form class="navbar-form navbar-left">
                 <div class="form-group">
+                    
                     <input type="text" class="form-control" placeholder="Search">
                 </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>-->
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?= site_url('SellerProfile'); ?>"><span class="glyphicon glyphicon-briefcase"></span> Account</a></li>
-                <li><a href="<?= site_url('ViewMessages'); ?>"><span class="glyphicon glyphicon-envelope"></span> Mail <span class="badge">42</span></a></li>
+                <li><a href="<?= site_url('ViewMessages'); ?>"><span class="glyphicon glyphicon-envelope"></span> Mail <span class="badge"><?=$numMessages;?></span></a></li>
                 <li><a href="<?= site_url('Register'); ?>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                 <li><a href="<?= site_url('Login'); ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
