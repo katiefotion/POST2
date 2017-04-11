@@ -6,7 +6,7 @@
                 <div class = "col-md-2">
                     <?php
                     $thumbnailUrl = site_url("thumbnail/$item->photo");
-                    $uri = "prototype/item/$item->id";
+                    $uri = "item/$item->id";
                     echo anchor($uri, "<img src='$thumbnailUrl' class='img-responsive'>");
                     ?>
                 </div>
