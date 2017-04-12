@@ -23,12 +23,12 @@
             <form>
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="name" class="form-control" id="name", placeholder="Title">
+                    <input type="name" class="form-control" id="name" name ="name" placeholder="Title">
                 </div>
 
                 <div class="form-group">
                     <label for="price">Price:</label>
-                    <input type="price" class="form-control" id="price" placeholder="$">
+                    <input type="price" class="form-control" id="price" name ="price" placeholder="$">
                 </div>
 
                 <div class="form-group">
@@ -99,7 +99,6 @@
     </div>
     <div class = "row">
         <div class = "col-md-5"> </div>
-        Still need to add href to Cancel Button
         <div class = "col-md-1"> 
             <a href="./" class="btn btn-danger btn-block" role="button">Cancel</a>
         </div>
