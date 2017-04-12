@@ -1,39 +1,25 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <?php
-            echo "<h1 class=\"text-center\">Seller Profile</h1>";
-        ?>
+        <h1 class="text-center">My Account</h1>
     </div>
-</div>
-
-<div class="container">
     <div class="row">
-        <div class="col-sm-6">
-            <?php
-                $path = site_url("/Add_New_Post");
-                echo "<a href='$path' style=\"font-size: large\" "
-            . "class=\"btn btn-default btn-block\" role=\"button\">Add New Post</a>";
-                
-            ?>
-            
-        </div>
-    
-        <div class="col-sm-6">
-            <?php
-                $path = site_url("/Add_New_Post");
-                echo "<a href='$path' style=\"font-size: large\" "
-            . "class=\"btn btn-default btn-block\" role=\"button\">Check Messages</a>";
-                
-            ?>
-        </div>
-    </div>
-</div>
+        <div class="col-md-3"></div>
+        <div class ="col-md-6 panel panel-default">
+            <div class="col-md-6 ">
+                <h2>Jane Doe</h2>
+                <label>Email: </label><p>jdoe@sfsu.edu</p>
+                <label>Phone Number: </label><p>(555) 555-5555</p>
+                <label>Password: </label><p>*******</p>
 
-
-<div class="container">
-    <div class="row">    
-            <?php
-                echo "<h3>Current Posts: </h3>";
-            ?>
+                <button class="btn btn-primary" style="font-size:large">Edit Settings</button>
+                <p></p>
+            </div>
+        
+            <div class="col-md-6 text-right ">
+                <br><br>
+                <h4><a href="/ViewMessages">View Messages</a></h4>
+                <h4><a href="#">Current Posts</a></h4>            
+            </div>     
+        </div>
     </div>
 </div>
