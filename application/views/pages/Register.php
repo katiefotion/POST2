@@ -1,8 +1,9 @@
 <div class="container-fluid">   
-    <div class="col-md-2"></div>
-    <div class="col-md-8 text-center">
-        
-       <h2>Register</h2>
+    <div class="col-md-3"></div>
+    <div class="col-md-6 text-center"><br>
+       <div class="panel panel-default">
+       <h2>REGISTER</h2>
+       
        <form action='' method="POST">
             <div class="form-group">
                 <label for="name">NAME</label><br>
@@ -35,19 +36,20 @@
                 <p class="help-block">Please confirm password</p>
             </div>
     
-           <div class="form-group">
+            <div class="form-group">
                <p><input type="checkbox" name="terms" autocomplete="off">
                    I agree to the <a href="#"> Terms & Conditions</a></p>
-           </div>
+            </div>
            
             <div class="form-group">
-                <button class="btn btn-danger">Cancel</button>
+                <button class="btn btn-danger"><a href="/" style="color:white">Cancel</a></button>
                 <button class="btn btn-success">Register</button>
             </div>
            
         </form> 
     </div>
-    <div class="col-md-2"></div>            
+    </div>
+    <div class="col-md-3"></div>            
         
 </div>
 
