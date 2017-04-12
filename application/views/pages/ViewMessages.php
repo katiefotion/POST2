@@ -5,10 +5,10 @@
             <thead>
             <tr>
               <th></th>
-              <th onclick="">Date</th>
-              <th>Message</th>
-              <th onclick="">Item</th>
-              <th onclick="">Messenger</th>
+              <th id="date" onclick="formatColumn1()">Date &#x25B2</th>
+              <th id="message">Message</th>
+              <th id="item" onclick="formatColumn2()">Item &#x25B2</th>
+              <th id="messenger" onclick="formatColumn3()">Messenger &#x25B2</th>
             </tr>
           </thead>
           <tbody>
@@ -31,3 +31,19 @@
         <button type="button" onclick="">Delete</button>
     </div>
 </div>
+
+<script>
+    function formatColumn1(){
+        if(document.getElementById("date").innerHTML === "Date &#x25BC"){
+            document.getElementById("date").innerHTML === "Date &#x25B2"
+        }
+        else
+            document.getElementById("date").innerHTML = "Date &#x25BC"
+    }
+    function formatColumn2(){
+        document.getElementById("item").innerHTML = "Item &#x25BC";
+    }
+    function formatColumn3(){
+        document.getElementById("messenger").innerHTML = "Messenger &#x25BC";
+    }
+</script>
