@@ -1,12 +1,5 @@
-<?php
-if (!isset($currentPage)) {
-    $currentPage = "";
-}
-$links = array(
-    array('name' => 'Browse', 'uri' => 'items'),
-    array('name' => 'Sell', 'uri' => 'Add_New_Post'),
-    array('name' => 'About', 'uri' => 'about'),
-);
+<?php 
+if (!isset($currentPage)) $currentPage = "";
 $numMessages = 3;
 ?>
 
@@ -24,24 +17,12 @@ $numMessages = 3;
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <?php
-                foreach ($links as $link) {
-                    $li = $link['name'] == $currentPage ? '<li class="active">' : '<li>';
-                    $url = site_url($link['uri']);
-                    echo "$li<a href='$url'>{$link['name']}</a></li>\n";
-                }
-                ?>
+                <li><a href="<?= site_url('items'); ?>">Buy</a></li>
+                <li><a href="<?= site_url('Add_New_Post'); ?>">Sell</a></li>
             </ul>
             <ul>
                 <?php $this->load->view('widgets/navBarSearch',array('selected'=>$selected));?>
             </ul>
-<!--            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Search</button>
-            </form>-->
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?= site_url('SellerProfile'); ?>"><span class="glyphicon glyphicon-briefcase"></span> Account</a></li>
                 <li><a href="<?= site_url('ViewMessages'); ?>"><span class="glyphicon glyphicon-envelope"></span> Mail <span class="badge"><?=$numMessages;?></span></a></li>
