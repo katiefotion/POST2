@@ -26,6 +26,7 @@ $this->load->helper('html');
         <div class="content">        
             <div class="container min-lr-pad">
                 <?php
+                if(!isset($selected)) $selected = 0;
                 $this->load->view('widgets/sfsu_notice');
-                $this->load->view('widgets/navbar',array('categories'=>$categories,'selected'=>$selected));
+                $this->load->view('widgets/navbar',array('selected'=>$selected));
                 ?>

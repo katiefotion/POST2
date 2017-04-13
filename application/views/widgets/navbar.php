@@ -33,7 +33,7 @@ $numMessages = 3;
                 ?>
             </ul>
             <ul>
-                <?php $this->load->view('widgets/navBarSearch',array('categories'=>$categories,'selected'=>$selected));?>
+                <?php $this->load->view('widgets/navBarSearch',array('selected'=>$selected));?>
             </ul>
 <!--            <form class="navbar-form navbar-left">
                 <div class="form-group">
