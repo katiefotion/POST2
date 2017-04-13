@@ -3,19 +3,15 @@
 class Items extends CI_Controller {
 
     public function view() {
-        $this->load->model('categories_model');
         $this->load->model('items_model');
 
-        $category = $this->input->get('category');
-        if (!is_numeric($category))
-            $category = 0;
+        $categoryID = $this->input->get('categoryID');
+        if (!is_numeric($categoryID))
+            $categoryID = 0;
 
-        $data['categories'] = $this->categories_model->get_categories();
-        $data['items'] = $this->items_model->get_items($category);
-        $data['selected'] = $category;
-        $data['title'] = 'Items';
+        $data['items'] = $this->items_model->get_items($categoryID);
 
-        $this->load->view('templates/header', $data);
+        $this->load->view('templates/header', array('title' => 'Items For Sale','selected'=>$categoryID));
         $this->load->view('pages/items', $data);
         $this->load->view('templates/footer');
     }
