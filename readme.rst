@@ -1,3 +1,20 @@
+###################
+Setting up sessions
+###################
+
+1. Create a directory
+	Windows: create a directory called sessions on the root of c:
+	
+	Mac: mkdir ~/sessions
+	
+2. Update the config.php file in the application/config folder
+
+	change: $config['sess_save_path'] = NULL;
+	
+	windows: $config['sess_save_path'] = 'c:/sessions';
+	
+	mac: $config['sess_save_path'] = '~/sessions';
+
 ####################
 Install Instructions
 ####################
