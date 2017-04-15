@@ -10,7 +10,6 @@ class Registered_user_accounts extends CI_Model {
         $result = $this->db->where(array('email' => $email, 'password' => md5($password)))
                 ->get('registered_user_accounts')
                 ->row_array();
-        echo $password;
         return $result;
     }
 

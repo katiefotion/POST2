@@ -22,7 +22,7 @@
                     
                     <div class="control-group">
                         <div class="controls">
-                            <button class="btn btn-default"><strong>Login</strong></button>
+                            <button type="submit" name="submit" value="submit" class="btn btn-default"><strong>Login</strong></button>
                         </div>
                     </div>
                 </form>
