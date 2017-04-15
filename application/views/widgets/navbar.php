@@ -17,17 +17,22 @@ $numMessages = 3;
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="<?= site_url('items'); ?>">Buy</a></li>
+                <!--<li><a href="<?= site_url('items'); ?>">Buy</a></li>-->
                 <li><a href="<?= site_url('Add_New_Post'); ?>">Sell</a></li>
             </ul>
             <ul>
                 <?php $this->load->view('widgets/navBarSearch',array('selected'=>$selected));?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<?= site_url('SellerProfile'); ?>"><span class="glyphicon glyphicon-briefcase"></span> Account</a></li>
-                <li><a href="<?= site_url('ViewMessages'); ?>"><span class="glyphicon glyphicon-envelope"></span> Mail <span class="badge"><?=$numMessages;?></span></a></li>
-                <li><a href="<?= site_url('Register'); ?>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="<?= site_url('Login'); ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <?php if(isset($_SESSION['username'])){?>
+                    <li><a href="<?= site_url('SellerProfile'); ?>"><span class="glyphicon glyphicon-briefcase"></span> Account</a></li>
+                    <li><a href="<?= site_url('ViewMessages'); ?>"><span class="glyphicon glyphicon-envelope"></span> Mail <span class="badge"><?=$numMessages;?></span></a></li>
+                    <li><a href="<?= site_url('logout'); ?>"><span class="glyphicon glyphicon-log-in"></span> Login out: <?= $_SESSION['username'];?> </a></li>
+                <?php } else { ?>
+                    <li><a href="<?= site_url('Register'); ?>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="<?= site_url('login'); ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <?php } ?>
+               
             </ul>
         </div>
     </div>
