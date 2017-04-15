@@ -3,7 +3,7 @@
         <div class="col-sm-6">
             <div class =" text-center">
                 <h2>ALREADY REGISTERED?</h2>
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                <form method="post" action="<?php site_url('login');?>">
                     <div class="control-group">
                         <label class="control-label"  for="email">EMAIL</label>
                         <div class="controls">
