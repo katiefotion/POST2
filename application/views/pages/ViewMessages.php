@@ -5,26 +5,26 @@
             <thead>
             <tr>
               <th></th>
-              <th id="date" onclick="formatColumn1()">Date &#x25B2</th>
-              <th id="message">Message</th>
-              <th id="item" onclick="formatColumn2()">Item &#x25B2</th>
-              <th id="messenger" onclick="formatColumn3()">Messenger &#x25B2</th>
+              <th id="date" style="cursor: pointer" class=text-center onclick="formatColumn1()">Date ▲</th>
+              <th id="item" style="cursor: pointer" class=text-center onclick="formatColumn2()">Item ▲</th>
+              <th id="messenger" style="cursor: pointer" class=text-center onclick="formatColumn3()">Messenger ▲</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><input type="checkbox" value=""></td>
               <td>3/14/17</td>
-              <td>I would like to buy that</td>
               <td>Box of Cigarettes</td>
               <td>Mike Smith</td>
+              <td><button type="button" onclick="">View Message</button></td>
             </tr>
             <tr>
               <td><input type="checkbox" value=""></td>
               <td>3/15/17</td>
-              <td>Does it come in blue?</td>
               <td>Bowling Ball</td>
               <td>Sally King</td>
+              <td><button type="button" onclick="">View Message</button></td>
             </tr>
           </tbody>
         </table>
@@ -34,16 +34,24 @@
 
 <script>
     function formatColumn1(){
-        if(document.getElementById("date").innerHTML === "Date &#x25BC"){
-            document.getElementById("date").innerHTML === "Date &#x25B2"
-        }
-        else
-            document.getElementById("date").innerHTML = "Date &#x25BC"
+        var text = document.getElementById("date").innerHTML;
+        if(text === "Date ▲")
+            document.getElementById("date").innerHTML = "Date ▼";
+        else if(text === "Date ▼")
+            document.getElementById("date").innerHTML = "Date ▲";
     }
     function formatColumn2(){
-        document.getElementById("item").innerHTML = "Item &#x25BC";
+        var text = document.getElementById("item").innerHTML;
+        if(text === "Item ▲")
+            document.getElementById("item").innerHTML = "Item ▼";
+        else if(text === "Item ▼")
+            document.getElementById("item").innerHTML = "Item ▲";
     }
     function formatColumn3(){
-        document.getElementById("messenger").innerHTML = "Messenger &#x25BC";
+        var text = document.getElementById("messenger").innerHTML;
+        if(text === "Messenger ▲")
+            document.getElementById("messenger").innerHTML = "Messenger ▼";
+        else if(text === "Messenger ▼")
+            document.getElementById("messenger").innerHTML = "Messenger ▲";
     }
 </script>
