@@ -37,6 +37,10 @@ body {
     margin-bottom: 0px;
 }
 
+container-login-page{
+    padding-top: 20px;
+}
+
 .home-banner{
     color: yellow !important;
 }
@@ -44,7 +48,13 @@ body {
     height: 400px;
     width: 100%;
 }
-
+.navbar-center
+{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
 /* Required field START */
 
 .required-field-block {
