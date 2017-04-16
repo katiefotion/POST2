@@ -17,7 +17,6 @@ $numMessages = 3;
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <!--<li><a href="<?= site_url('items'); ?>">Buy</a></li>-->
                 <li><a href="<?= site_url('Add_New_Post'); ?>">Sell</a></li>
             </ul>
             <ul>
