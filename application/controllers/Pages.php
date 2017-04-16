@@ -8,14 +8,8 @@ class Pages extends CI_Controller {
             show_404();
         }
 
-        $this->load->model('categories_model');
- 
-        $data['categories'] = $this->categories_model->get_categories();
-        $data['selected'] = 0;
-        $data['title'] = 'Items';
-
-        $this->load->view('templates/header', $data);
-        $this->load->view('pages/' . $page, $data);
+        $this->load->view('templates/header', array('title' => ucfirst($page)));
+        $this->load->view('pages/' . $page);
         $this->load->view('templates/footer');
     }
 
