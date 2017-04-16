@@ -14,7 +14,7 @@ class Login extends CI_Controller {
                 redirect('');
             } else {
                 $this->load->view('templates/header', array('title' => 'Login'));
-                $this->load->view('pages/Login');
+                $this->load->view('pages/Login', array('invalid' => true));
                 $this->load->view('templates/footer');
             }
         } else {
