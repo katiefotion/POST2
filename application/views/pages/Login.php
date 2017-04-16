@@ -1,58 +1,74 @@
-<div class="container-fluid">
+<div class="container-fluid container-login-page">
     <div class="row">
         <div class="col-sm-6">
-            <div class =" text-center">
-                <h2>ALREADY REGISTERED?</h2>
-                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                    <div class="control-group">
-                        <label class="control-label"  for="email">EMAIL</label>
-                        <div class="controls">
-                            <input type="email" id="email" name="email" placeholder="jsmith@sfsu.edu" class="input-xlarge">
-                            <p></p>
-                        </div>
+            <div class ="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h2>Already Registered?</h2>                   
+                </div>
+                <div class="panel-body">
+                    <?php if(isset($invalid)){ ?>
+                    <div class="alert alert-danger text-center">
+                        <strong>Invalid e-mail or password</strong>
                     </div>
-                    
-                    <div class="control-group">
-                        <label class="control-label"  for="password">PASSWORD</label>
-                        <div class="controls">
-                            <input type="password" id="password" name="password"class="input-xlarge">
-                            <p></p>
+                    <?php }?>
+                    <form method="post" action="<?= site_url('login'); ?>">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="email">e-mail:</label> 
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" id="email" name="email" placeholder="email" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="control-group">
-                        <div class="controls">
-                            <button class="btn btn-default"><strong>Login</strong></button>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label for="email">Password:</label> 
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="password" id="password" name="password" placeholder="password" class="form-control">
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </form>
-                <a href="#" class="btn" role="button">Forgot password?</a>
+                        <div class="form-group form-inline pull-right">
+                            <button type="submit" name="submit" value="submit" class="btn btn-success">Login</button>
+                            <button type="cancel" class="btn btn-danger" onclick="window.history.back();">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer text-center">
+                    <a href="<?= site_url('forgotPwd'); ?>" class="btn btn-default" role="button">Forgot password?</a>
+                </div>
+
             </div>
         </div>
-    
+
+
         <div class="col-sm-6">
             <div class =" text-center">
-                <h2>DONT HAVE AN ACCOUNT?</h2>
+                <h2>Don't Have an Account?</h2>
                 <p>Registration only takes a few moments and 
-                   you'll receive the following benefits</p>
+                    you'll receive the following benefits</p>
             </div>
-                        
+
             <div class=" col-sm-3"></div>
             <div class="col-sm-9">
                 <li>Post items to sell to SFSU students</li>
-                <li>Access <a href="#">Safe Meeting</a> locations</li>
+                <li>Access Safe Meeting locations</li>
                 <li>All your details saved for fast posting</li>
                 <li>And more!</li><br>                
             </div>
-                
-            <?php
-                    $path = site_url("/Register");
-                    echo "<p class=\"text-center\"><a href='$path' "
-                            . "style=\"font-size: large\" class=\"btn btn-default\""
-                            . "  role=\"button\">Register Now</a></p>";
-                ?>     
-        
+
+            <p class="text-center"><a href="<?= site_url('Register'); ?>" style="font-size: large" 
+                                      class="btn btn-default" role="button">Register Now</a></p>     
+
         </div>
     </div>
-    
+
 </div>
