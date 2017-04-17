@@ -4,7 +4,7 @@
        <div class="panel panel-default">
        <h2>REGISTER</h2>
        
-       <form action='' method="POST">
+       <form action='<?= site_url('register_confirmation');?>' method="POST">
             <div class="form-group">
                 <label for="name">NAME</label><br>
                 <input type="text" id="name" name="name" placeholder="John Smith" class="input-xlarge">
@@ -42,7 +42,7 @@
             </div>
            
             <div class="form-group">
-                <button class="btn btn-danger"><a href="/" style="color:white">Cancel</a></button>
+                <a class="btn btn-danger" href="<?= site_url();?>">Cancel</a>
                 <button class="btn btn-success">Register</button>
             </div>
            
