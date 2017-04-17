@@ -1,5 +1,4 @@
 <?php
-    //expect to receive the item description for the subject line
     $seller = "Morty Smith";
     $description = "Harry Potter";
 ?>
@@ -19,8 +18,18 @@
             <div class="row">
                 <div class="col-lg-3"></div>
                 <div class="col-lg-6 form-group">
+                    <label for="to">TO</label>                  
+                    <div class="panel panel-default panel-body">
+                        <?php
+                            echo $seller;
+                        ?>
+                    </div>
+                </div>  
+            </div>
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6 form-group">
                     <label for="item_description">ITEM</label>
-                    <!--need to receive the item name for this -->
                     <div class="panel panel-default panel-body">
                         <?php
                             echo $description;
@@ -36,8 +45,8 @@
                     <textarea class="form-control" rows="5" id="message"></textarea>
                     <p></p>
                     <div class="text-right">
-                        <button class="btn btn-danger">Cancel</button>
-                        <button class="btn btn-success">Send Message</button>
+                        <button class="btn btn-danger" onclick="window.history.back();">Cancel</button>
+                        <button class="btn btn-success" type="submit"><a href="<?= site_url('Register'); ?>" style="color: white">Send Message</a></button>
                     </div>
                 </div>
             </div>
