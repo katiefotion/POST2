@@ -10,9 +10,9 @@
             <input type="code" class="form-control" id="email" placeholder="confimation code">
         </div>
         <div class ="text-right">
-            <a href="Login"<button type="cancel" class="btn btn-default">Cancel</button> </a>
+            <a href="<?= site_url('Login'); ?>"<button type="cancel" class="btn btn-default">Cancel</button> </a>
             
-            <a href="home"<button type="submit" class="btn btn-default">Submit</button> </a>
+            <a href="<?= site_url('home'); ?>"<button type="submit" class="btn btn-default">Submit</button> </a>
         </div>
     </form>
 </div>
