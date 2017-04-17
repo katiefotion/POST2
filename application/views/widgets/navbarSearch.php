@@ -1,4 +1,3 @@
-<?php $this->load->helper('categories');?>
 <form class="navbar-form navbar-left" method="get" action="<?= site_url('items');?>">
     <div class="form-group">
         <?php categories_select('All','class = "form-control" name="categoryID"',$selected);?>
