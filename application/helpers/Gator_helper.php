@@ -22,3 +22,14 @@ if ( ! function_exists('categories_select')){
        }
    }
 }
+
+if ( ! function_exists('gs_pagination')){
+   function gs_pagination($total, $items_per_page = 10, $cur_page = 0){
+       echo '<div class="text-right">';
+        echo '<nav><ul class="pagination">';
+        echo '<li><a href="#">&laquo;</a></li>';
+        echo '<li><a href="#">1</a></li>';
+        echo '<li><a href="#">&raquo;</a></li>';
+        echo '</ul></nav></div>';
+   }
+}

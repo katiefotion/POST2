@@ -5,6 +5,7 @@
     </div>
 
     <?php
+    gs_pagination(10);
     foreach ($items as $item) {
         $this->load->view('widgets/itembox', array('item' => $item));
     }
