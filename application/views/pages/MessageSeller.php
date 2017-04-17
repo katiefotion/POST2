@@ -1,6 +1,7 @@
 <?php
     //expect to receive the item description for the subject line
-    $description = "";
+    $seller = "Morty Smith";
+    $description = "Harry Potter";
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -18,7 +19,7 @@
             <div class="row">
                 <div class="col-lg-3"></div>
                 <div class="col-lg-6 form-group">
-                    <label for="subject">SUBJECT</label>
+                    <label for="item_description">ITEM</label>
                     <!--need to receive the item name for this -->
                     <div class="panel panel-default panel-body">
                         <?php
