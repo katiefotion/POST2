@@ -4,7 +4,7 @@
         <table class="table table-bordered table-responsive">
             <thead>
             <tr>
-              <th><a href="" class="btn btn-danger">Delete</a></th>
+              <th class="text-center"><a href="" class="btn btn-danger">Delete</a></th>
               <th id="date" style="cursor: pointer" class=text-center onclick="formatColumn1()">Date ▲</th>
               <th id="item" style="cursor: pointer" class=text-center onclick="formatColumn2()">Item ▲</th>
               <th id="messenger" style="cursor: pointer" class=text-center onclick="formatColumn3()">Messenger ▲</th>
@@ -28,7 +28,6 @@
             </tr>
           </tbody>
         </table>
-        <button type="button" onclick="">Delete</button>
     </div>
 </div>
 
