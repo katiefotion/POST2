@@ -1,6 +1,6 @@
 <?php
-    $seller = "Morty Smith";
-    $description = "Harry Potter The Tales of Beedle the Bard";  
+$seller = "Morty Smith";
+$description = "Harry Potter The Tales of Beedle the Bard";
 ?>
 
 <div class="container-fluid"> 
@@ -19,7 +19,7 @@
                             <p>Message the seller about purchasing the item or about questions pertaining to the product</p> 
                         </div>
                         <div class="row ">
-                            <form class="form-horizontal" action='' method="POST">
+                            <form class="form-horizontal" action='<?= site_url('confirmation'); ?>' method="POST">
                                 <div class="row">
                                     <label for="to">TO</label>                  
                                     <div class="panel panel-default panel-body">
@@ -28,31 +28,31 @@
                                         ?>  
                                     </div>
                                 </div>
-                                
-                            <div class="row"> 
-                                <label for="item_description">ITEM</label>
-                                <div class="panel panel-default panel-body">
-                                    <?php
-                                        echo $description;
-                                    ?>
-                                </div>
-                            </div>
 
-                            <div class="row">
-                                <label for="message">MESSAGE</label>
-                                <textarea class="form-control" rows="6" id="message"></textarea>
-                                <p></p>
-                                <div class="text-right">
-                                    <button class="btn btn-danger" onclick="window.history.back();">Cancel</button>
-                                    <button class="btn btn-success" type="submit"><a href="<?= site_url('confirmation'); ?>" style="color: white">Send Message</a></button>
+                                <div class="row"> 
+                                    <label for="item_description">ITEM</label>
+                                    <div class="panel panel-default panel-body">
+                                        <?php
+                                        echo $description;
+                                        ?>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>    
+
+                                <div class="row">
+                                    <label for="message">MESSAGE</label>
+                                    <textarea class="form-control" rows="6" id="message"></textarea>
+                                    <p></p>
+                                    <div class="text-right">
+                                        <button class="btn btn-danger" onclick="window.history.back();">Cancel</button>
+                                        <button class="btn btn-success" type="submit">Send Message</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>    
+                    </div>
+                    <div class="col-md-1"></div>              
                 </div>
-                <div class="col-md-1"></div>              
             </div>
-        </div>
         </div>
         <div class="col-md-2"></div>
     </div>  
