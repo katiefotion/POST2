@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="text-center">
         <h1>Messages</h1>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-responsive">
             <thead>
             <tr>
               <th></th>
@@ -17,14 +17,14 @@
               <td>3/14/17</td>
               <td>Box of Cigarettes</td>
               <td>Mike Smith</td>
-              <td><button type="button" onclick="">View Message</button></td>
+              <td><a href="<?= site_url('ViewMessage')?>" class="btn bg-primary">View Message</a></td>
             </tr>
             <tr>
               <td><input type="checkbox" value=""></td>
               <td>3/15/17</td>
               <td>Bowling Ball</td>
               <td>Sally King</td>
-              <td><button type="button" onclick="">View Message</button></td>
+              <td><a href="<?= site_url('ViewMessage')?>" class="btn bg-primary">View Message</a></td>
             </tr>
           </tbody>
         </table>

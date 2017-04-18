@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <h1>Available Items For Sale</h1>
+    <h1 class="text-center">Items For Sale</h1>
     <div class="row">
         <div class="col-md-4">
         </div> 
