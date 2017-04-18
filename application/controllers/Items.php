@@ -5,8 +5,8 @@ class Items extends CI_Controller {
     public function view($categoryID = 0, $page = 0) {
         $this->load->model('items_model');
 
-        $data['items'] = $this->items_model->get_items($categoryID,$page);
-        $data['total'] = $this->items_model->items_count($categoryID);
+        $data['items'] = $this->items_model->get_items($categoryID,$_GET['query'],$page);
+        $data['total'] = $this->items_model->items_count($categoryID,$_GET['query']);
         $data['categoryID'] = $categoryID;
         $data['page'] = $page;
         $data['start'] = $data['total'] == 0 ? 0 : $page * 10 + 1;

@@ -7,18 +7,35 @@ class Items_model extends CI_Model {
         $this->load->database();
     }
 
-    public function items_count($category_id = 0) {
+    public function items_count($category_id = 0,$like = '') {
         if ($category_id != 0) {
             $this->db->where('category_id', $category_id);
+        }
+        $tok = strtok($like, ' ');
+        while($tok){
+            $this->db->group_start()
+                    ->like('name',$tok)
+                    ->or_like('description', $tok)
+                    ->group_end();
+            $tok = strtok(' ');
         }
         return $this->db->count_all_results('items');
     }
 
-    public function get_items($category_id = 0, $page = -1, $how_many = 10) {
+    public function get_items($category_id = 0,$like = '', $page = -1, $how_many = 10) {
 
         if ($category_id)
             $this->db->where(array('category_id' => $category_id));
         // if $page is -1, get everything.  Otherwise, limit the results
+        $tok = strtok($like, ' ');
+        while($tok){
+            $this->db->group_start()
+                    ->like('name',$tok)
+                    ->or_like('description', $tok)
+                    ->group_end();
+            $tok = strtok(' ');
+        }
+
         if ($page != -1)
             $this->db->limit($how_many, $page * $how_many);
 
