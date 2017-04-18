@@ -15,7 +15,7 @@
         </div>
         <div class = "col-md-2">
             <h3>Price: $<?= number_format($item->price, 2); ?></h3>
-            <a href="#" class="btn btn-default btn-block btn-wrap" role="button">Buy Now! (goes nowhere in the prototype)</a>
+            <a href="<?= site_url('MessageSeller');?>" class="btn btn-warning btn-block btn-wrap" role="button">Contact Seller</a>
         </div>
     </div>
 </div>

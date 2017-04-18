@@ -13,6 +13,7 @@ $this->load->helper('html');
 
         <!-- Bootstrap -->
         <link href="<?= base_url('assets/bootstrap/css/bootstrap.min.css'); ?>" rel="stylesheet">
+        <link href="<?= base_url('assets/font-awesome/css/font-awesome.min.css'); ?>" rel="stylesheet">
         <link href="<?= base_url('assets/style.css'); ?>" rel="stylesheet">
 
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -23,8 +24,10 @@ $this->load->helper('html');
         <![endif]-->
     </head>
     <body>
-        <div class="container-fluid container-main">
-            <?php
-            $this->load->view('widgets/sfsu_notice'); 
-            $this->load->view('widgets/navbar');
-            ?>
+        <div class="content">        
+            <div class="container min-lr-pad">
+                <?php
+                if(!isset($selected)) $selected = 0;
+                $this->load->view('widgets/sfsu_notice');
+                $this->load->view('widgets/navbar',array('selected'=>$selected));
+                ?>

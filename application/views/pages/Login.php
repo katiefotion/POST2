@@ -1,48 +1,54 @@
-<div class="jumbotron">
-	<div class="container">
-		<div class="row">
-				<H1 class="text-center">Login</H1>
-		</div>
-	</div>
-</div>
-
-
-
-<div class="row">
+<div class="container-fluid container-login-page">
+    <div class="col-sm-3"></div>
     <div class="col-sm-6">
-        <div class =" text-center">
-            <h2>ALREADY REGISTERED?</h2>
-            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                EMAIL<br><input type="text" name="email" placeholder="jsmith@mail.sfsu.edu"><br><br>
-                PASSWORD <br><input type="text" name="password"><br><br>
-                <input type="submit">
-            </form>
-            <a href="#" class="btn" role="button">Forgot password?</a>
-        </div>
-    </div>
-    
-    <div class="col-sm-6">
-        <div class =" text-center">
-            <h2>DONT HAVE AN ACCOUNT?</h2>
-            <p>Registration only takes a few moments and 
-                you'll receive the following benefits</p>
-        </div>
-            
-            
-            <div class=" col-sm-3">
-                
+            <div class ="panel panel-default">
+                <div class="panel panel-heading">
+                    <h2 class="text-center">Login</h2> 
+                </div>
+                                  
+                <div class="panel-body">
+                    <?php if(isset($invalid)){ ?>
+                    <div class="alert alert-danger text-center">
+                        <strong>Invalid e-mail or password</strong>
+                    </div>
+                    <?php }?>
+                    <form method="post" action="<?= site_url('login'); ?>">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3" style="text-align: right">
+                                    <label for="email">Email: </label> 
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" id="email" name="email" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3" style="text-align: right">
+                                    <label for="password">Password: </label> 
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="password" id="password" name="password" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group form-inline text-center">
+                            <button type="submit" name="submit" value="submit" class="btn btn-success" >Login</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer text-center">
+                    <a href="<?= site_url('Register'); ?>" class="btn btn-default" role="button">Register</a>
+                    <a href="<?= site_url('forgotPwd'); ?>" class="btn btn-default" role="button">Forgot password?</a>
+                </div>
+
             </div>
-            <div class="col-sm-9">
-                <li>Post items to sell to SFSU students</li>
-                <li>Access <a href="#">Safe Meeting</a> locations</li>
-                <li>All your details saved for fast posting</li>
-                <li>And more!</li><br>
-                
-            </div>
-                
-            <p class = "text-center"><a href="#" style="font-size: large"
-                    class="btn btn-default" role="button">Register Now</a>
-            </p>    
-        
-    </div>
+        </div>
+
+
 </div>

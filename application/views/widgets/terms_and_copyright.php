@@ -1,4 +1,4 @@
-<div class="panel footer min-b-pad">
+<div class="panel min-b-margin">
     <div class="panel-body footer-text">
         <div class="container-fluid">
             <div class="row footer-text">

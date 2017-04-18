@@ -1,15 +1,9 @@
-<?php
-    if(!isset($currentPage)){
-        $currentPage = "";
-    }
-    $links = array(
-        array('name'=>'Home','uri' => ''),
-        array('name'=>'V-Prototype','uri' => 'prototype'),
-        array('name'=>'About','uri' => 'about'),
-    );
+<?php 
+if (!isset($currentPage)) $currentPage = "";
+$numMessages = 3;
 ?>
 
-<nav class="navbar navbar-inverse">
+<nav class="min-b-margin navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -23,16 +17,21 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <?php foreach ($links as $link){
-                    $li = $link['name'] == $currentPage ? '<li class="active">' : '<li>';
-                    $url = site_url($link['uri']);
-                    echo "$li<a href='$url'>{$link['name']}</a></li>\n";
-                }
-                ?>
+                <li><a href="<?= site_url('Add_New_Post'); ?>">Sell</a></li>
+            </ul>
+            <ul>
+                <?php $this->load->view('widgets/navBarSearch',array('selected'=>$selected));?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <?php if(isset($_SESSION['account'])){?>
+                    <li><a href="<?= site_url('SellerProfile'); ?>"><span class="glyphicon glyphicon-briefcase"></span> Account</a></li>
+                    <li><a href="<?= site_url('ViewMessages'); ?>"><span class="glyphicon glyphicon-envelope"></span> Mail <span class="badge"><?=$numMessages;?></span></a></li>
+                    <li><a href="<?= site_url('logout'); ?>"><span class="glyphicon glyphicon-log-in"></span> Login out: <?= $_SESSION['account']['screen_name'];?> </a></li>
+                <?php } else { ?>
+                    <li><a href="<?= site_url('Register'); ?>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="<?= site_url('login'); ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <?php } ?>
+               
             </ul>
         </div>
     </div>

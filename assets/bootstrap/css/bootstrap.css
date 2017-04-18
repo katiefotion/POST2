@@ -238,7 +238,7 @@ th {
   h3 {
     page-break-after: avoid;
   }
-  .navbar {
+  .min-b-margin {
     display: none;
   }
   .btn > .caret,
@@ -4163,14 +4163,14 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.navbar {
+.min-b-margin {
   position: relative;
   min-height: 50px;
   margin-bottom: 20px;
   border: 1px solid transparent;
 }
 @media (min-width: 768px) {
-  .navbar {
+  .min-b-margin {
     border-radius: 4px;
   }
 }
@@ -4286,8 +4286,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   display: block;
 }
 @media (min-width: 768px) {
-  .navbar > .container .navbar-brand,
-  .navbar > .container-fluid .navbar-brand {
+  .min-b-margin > .container .navbar-brand,
+  .min-b-margin > .container-fluid .navbar-brand {
     margin-left: -15px;
   }
 }
@@ -6476,8 +6476,8 @@ button.close {
 .btn-group-vertical > .btn-group:after,
 .nav:before,
 .nav:after,
-.navbar:before,
-.navbar:after,
+.min-b-margin:before,
+.min-b-margin:after,
 .navbar-header:before,
 .navbar-header:after,
 .navbar-collapse:before,
@@ -6502,7 +6502,7 @@ button.close {
 .btn-toolbar:after,
 .btn-group-vertical > .btn-group:after,
 .nav:after,
-.navbar:after,
+.min-b-margin:after,
 .navbar-header:after,
 .navbar-collapse:after,
 .pager:after,

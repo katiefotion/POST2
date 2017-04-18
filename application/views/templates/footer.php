@@ -1,5 +1,8 @@
-</div> <!--close out the container--> 
-<?php $this->load->view('widgets/terms_and_copyright'); ?>
+    </div> <!--close out the container-->
+</div> <!--close out the contents class--> 
+<div class="container min-lr-pad">
+    <?php $this->load->view('widgets/terms_and_copyright'); ?>
+</div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

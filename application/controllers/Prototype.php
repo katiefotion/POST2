@@ -20,11 +20,11 @@ class Prototype extends CI_Controller {
         $data['categories'] = $this->categories_model->get_categories();
         $data['items'] = $this->items_model->get_items($category);
         $data['selected'] = $category;
-
+        $data['title'] = 'Vertical Prototype';
         // the view 'header' requries a variable $title to be passed to it.
         // array('key1'=> value1,'key2'=>value2, and so on) is another way
         // to set key-value pairs in an array
-        $this->load->view('templates/header', array('title' => 'Vertical Prototype'));
+        $this->load->view('templates/header', $data);
         // the view 'prototype' requres $categories, $items, and $selected to be
         // passed as key-value pairs.  This was done in the previous block of 
         // code.  We can simply pass it as $data
