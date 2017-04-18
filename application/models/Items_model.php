@@ -31,7 +31,7 @@ class Items_model extends CI_Model {
         while($tok){
             $this->db->group_start()
                     ->like('name',$tok)
-                    ->or_like('description', $tok)
+                    ->or_like('long_description', $tok)
                     ->group_end();
             $tok = strtok(' ');
         }
