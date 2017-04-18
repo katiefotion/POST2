@@ -7,20 +7,20 @@
        <form action='<?= site_url('register_confirmation');?>' method="POST">
             <div class="form-group">
                 <label for="name">NAME</label><br>
-                <input type="text" id="name" name="name" placeholder="John Smith" class="input-xlarge">
+                <input type="text" id="name" name="name" class="input-xlarge">
                 <p></p>
             </div>
  
             <div class="form-group">
                 <label for="email">EMAIL</label><br>
-                <input type="email" id="email" name="email" placeholder="jsmith@sfsu.edu" class="input-xlarge">
+                <input type="email" id="email" name="email" class="input-xlarge">
                 <p class="help-block">Please provide your SFSU email</p>
             </div>
  
             <div class="form-group">
                 <label for="phone">PHONE NUMBER</label><br>
-                <input type="text" id="phone" name="phone" placeholder="(555) 555-5555" class="input-xlarge">
-                <p></p>
+                <input type="text" id="phone" name="phone"class="input-xlarge">
+                <p class="help-block">(555) 555-5555</p>
             </div>
             
             <div class="form-group">      
@@ -38,12 +38,12 @@
     
             <div class="form-group">
                <p><input type="checkbox" name="terms" autocomplete="off">
-                   I agree to the <a href="#"> Terms & Conditions</a></p>
+                   I agree to the <a href="<?= site_url('terms');?>"> Terms & Conditions</a></p>
             </div>
            
             <div class="form-group">
                 <a class="btn btn-danger" href="<?= site_url();?>">Cancel</a>
-                <button class="btn btn-success">Register</button>
+                <button class="btn btn-success"><a href="<?= site_url('register_confirmation');?>" style="color:white">Register</a></button>
             </div>
            
         </form> 
