@@ -20,7 +20,7 @@ $numMessages = 3;
                 <li><a href="<?= site_url('Add_New_Post'); ?>">Sell</a></li>
             </ul>
             <ul>
-                <?php $this->load->view('widgets/navBarSearch',array('selected'=>$selected));?>
+                <?php $this->load->view('widgets/navbarsearch',array('selected'=>$selected));?>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <?php if(isset($_SESSION['account'])){?>
