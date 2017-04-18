@@ -18,10 +18,11 @@ $locations = array(
 <div class = "container-fluid">
 
     <div class = "row">
+
         <div class = "col-md-6">
             <h2>Add New Post:</h2>
+            <form>
 
-            <form action="postconfirmation.php" method="post">
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <div class="required-field-block">
@@ -68,7 +69,7 @@ $locations = array(
                     </div>
                 </div>
 
-            </form>
+
 
         </div>
 
@@ -85,15 +86,15 @@ $locations = array(
                     ?>
 
                 </select>
-
-                </br>
+                </form>
+                <br>
 
                 <div id="map"></div>
 
                 <script>
 
                     var map;
-                    
+
                     function initMap() {
                         var uluru = {lat: 37.722558, lng: -122.4780799};
                         map = new google.maps.Map(document.getElementById('map'), {
@@ -103,9 +104,7 @@ $locations = array(
                         marker = new google.maps.Marker({
                             position: uluru,
                             map: map
-
                         });
- 
                     }
 
                 </script>
@@ -114,14 +113,13 @@ $locations = array(
                         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCPPBuI9Ok7SqFArQX8RjzG4DP4jfLZABc&callback=initMap">
                 </script>
 
-                
             </div>
         </div>
     </div>
     <div class = "row">
         <div class = "col-md-5"> </div>
         <div class = "col-md-1"> 
-            <a href="<?= site_url();?>" class="btn btn-danger btn-block" role="button">Cancel</a>
+            <a href="<?= site_url(); ?>" class="btn btn-danger btn-block" role="button">Cancel</a>
         </div>
         <div class = "col-md-1"> 
 
