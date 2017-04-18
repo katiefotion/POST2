@@ -16,5 +16,7 @@
     foreach ($items as $item) {
         $this->load->view('widgets/itembox', array('item' => $item));
     }
+    gs_pagination($total,"items/$categoryID",$_SERVER['QUERY_STRING'],$page);
     ?>
+    
 </div>
